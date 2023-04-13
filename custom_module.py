@@ -1,3 +1,5 @@
+# Fungsi manual_split 
+# untuk splitting string
 def manual_split(csv_str,char):
     elmt = 0
     for i in range(len(csv_str)):
@@ -12,11 +14,16 @@ def manual_split(csv_str,char):
             col +=1
     return dat
 
+# Fungsi manual_len 
+# mencari length array dengan syarat
+# di akhir array terdapat mark "EOP" atau ";EOP"
 def manual_len(arr):
     for i in range(1000):
         if arr[i]==";EOP" or arr[i]=="EOP":
             return i
 
+# Fungsi loader
+# memuat file menjadi dalam bentuk array
 def loader(directory):
     file = open(directory,"r")
     array = file.read()+";EOP"
