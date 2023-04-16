@@ -32,3 +32,14 @@ def loader(directory):
         array[i] = manual_split(array[i],";")
     file.close()
     return array
+
+# Fungsi manual_append
+# pengganti append
+def manual_append(array,element):
+    length = manual_len(array)
+    new_array = ["" for i in range(length+2)]
+    for i in range(length):
+        new_array[i] = array[i]
+    new_array[length] = element
+    new_array[length+1] = ";EOP"
+    return new_array
