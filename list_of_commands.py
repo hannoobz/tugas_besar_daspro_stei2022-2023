@@ -80,25 +80,17 @@ def summonjin(users,role):
  
 
 # F09 - Laporan Jin - Filbert F
-def laporanJin():
-    # Membaca Data
-    arr_candi = loader("candi.csv")
-    arr_bahan = loader("bahan_bangunan.csv")
-    arr_user = loader("user.csv")
-
-    data_candi = getData(arr_candi)
-    data_bahan = getData(arr_bahan)
-    data_user = getData(arr_user)
-
+def laporanJin(data_user,data_bahan,data_candi):
+    
     # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
-    count_jin = manual_len(data_user) - 2
+    count_jin = manual_len(data_user) - 3
 
     count_pengumpul = 0
     count_pembangun = 0
     for i in range(manual_len(data_user)):
-        if data_user[i][2] == "pengumpul":
+        if data_user[i][2] == "jin_pengumpul":
             count_pengumpul += 1
-        if data_user[i][2] == "pembangun":
+        if data_user[i][2] == "jin_pembangun":
             count_pembangun += 1
 
     # Mencari Jin Termalas dan Terajin
@@ -106,7 +98,7 @@ def laporanJin():
     arr_pembangun = [0 for i in range(count_pembangun + 1)]
     n = 0
     for i in range(manual_len(data_user)):
-        if data_user[i][2] == 'pembangun':
+        if data_user[i][2] == 'jin_pembangun':
             arr_pembangun[n] = data_user[i][0]
             n += 1
     arr_pembangun[n] = ";EOP"
