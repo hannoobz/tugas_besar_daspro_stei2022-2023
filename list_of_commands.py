@@ -78,6 +78,8 @@ def summonjin(users,role):
         print(f"Jin {UnameJin} berhasil dipanggil!")
         return manual_append(users,[UnameJin,PassJin,Tipe])
     
+   # TES
+    
 
         
 
