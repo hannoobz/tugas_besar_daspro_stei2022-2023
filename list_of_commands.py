@@ -15,19 +15,19 @@ def login(users,role,username):
                 print("\nSelamat datang,",username+"!")
                 print("Masukkan command “help” untuk daftar command yang dapat kamu panggil.")
                 role = users[iteration][2]
+                return role,username
             else:
                 print("\nPassword Salah!")
-            break
+                return "",""
         if users[iteration]==';EOP':
             print("\nUsername tidak terdaftar!")
-            break
+            return "",""
         iteration += 1
-    return role,username
 
 #F02 - Logout - HaniefFN
 def logout(role):
     if role !="":
-        return ""
+        return "",""
     else:
         print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
