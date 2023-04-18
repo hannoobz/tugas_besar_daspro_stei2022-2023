@@ -13,6 +13,8 @@ def LoadArg(arg):
 
 def runner(string_command):
     global users
+    global candi
+    global bahan_bangunan
     global role
     global username
     if string_command == "login":
@@ -21,3 +23,7 @@ def runner(string_command):
         role,username = logout(role)
     if string_command =="summonjin":
         users = summonjin(users,role)
+    if string_command =="laporanjin":
+        laporanJin(users,bahan_bangunan,candi)
+    #if string_command =="laporancandi":
+    #    laporanCandi(users,bahan_bangunan,candi)
