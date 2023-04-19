@@ -80,10 +80,15 @@ def summonjin(users,role):
  
 
 # F09 - Laporan Jin - Filbert F
-def laporanJin(data_user,data_bahan,data_candi):
+def laporanJin(users,bahan,candi):
     
     # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
     count_jin = manual_len(data_user) - 3
+    
+    # matriks yang berisi hanya data (judul tidak diproses)
+    data_user = removeFirstRow(users)
+    data_bahan = removeFirstRow(bahan)
+    data_candi = removeFirstRow(candi)
 
     count_pengumpul = 0
     count_pembangun = 0
