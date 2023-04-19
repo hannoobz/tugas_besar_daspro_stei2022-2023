@@ -25,5 +25,5 @@ def runner(string_command):
         users = summonjin(users,role)
     if string_command =="laporanjin":
         laporanJin(users,bahan_bangunan,candi)
-    #if string_command =="laporancandi":
-    #    laporanCandi(users,bahan_bangunan,candi)
+    if string_command =="laporancandi":
+       laporanCandi(candi)
