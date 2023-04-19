@@ -111,3 +111,18 @@ def howManyX(arr,x):
         if arr[i] == x:
             count+=1
     return count
+
+def findIdx(arr,x):
+    for i in range(manual_len(arr)):
+        if arr[i] == x:
+            return i
+    return False
+
+def removeElmt(arr,id):
+    new_arr = [0 for i in range(manual_len(arr) - 1)]
+    c = 0
+    for i in range(manual_len(arr)):
+        if i != id:
+            new_arr[c] = arr[i]
+            c += 1
+    return new_arr
