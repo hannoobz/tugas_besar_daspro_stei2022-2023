@@ -78,7 +78,6 @@ def summonjin(users,role):
         print(f"Jin {UnameJin} berhasil dipanggil!")
         return manual_append(users,[UnameJin,PassJin,Tipe])
  
-
 # F09 - Laporan Jin - Filbert F
 def laporanJin(users,bahan,candi):
     
@@ -180,7 +179,7 @@ def laporanJin(users,bahan,candi):
 # F10 - Laporan Candi - Filbert F
 def laporanCandi(candi):
     # Membaca data
-    count_candi = manual_len(candi) - 1
+    count = manual_len(candi) - 1
 
     if count == 0: # array kosong
         print(f"Total Candi: 0")
@@ -190,12 +189,10 @@ def laporanCandi(candi):
         print(f"ID Candi Termahal: -")
         print(f"ID Candi Termurah: -")
     
-    # Menghapus row judul
-    data_candi = removeFirstRow(candi)
-    
-    else: #candi tidak kosong
-        # Mencari Total Candi
-        count = manual_len(data_candi)
+    else:#candi tidak kosong
+        # Menghapus row judul
+        data_candi = removeFirstRow(candi)  
+
 
         # Mencari Total Pasir, Batu, dan Air Digunakan
         sum_pasir = sumArray(getArrayCol(data_candi,2))
