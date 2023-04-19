@@ -46,17 +46,12 @@ def manual_append(array,element):
 
 # Mengambil sebuah matriks dan hanya mengeluarkan row yang berisi data
 # (Menghapus row judul)
-# Program ini akan mengeluarkan boolean False jika tidak ada data
-# yang bisa diproses (length == 1 atau hanya ada row judul)
-def getData(arr):
+def removeFirstRow(arr):
     length = manual_len(arr)
-    if length == 1:
-        return False
-    else:
-        arr_data = [0 for i in range(manual_len(arr))]
-        for i in range(manual_len(arr)):
-            arr_data[i] = arr[i+1]
-        return arr_data
+    arr_data = [0 for i in range(manual_len(arr))]
+    for i in range(manual_len(arr)):
+        arr_data[i] = arr[i+1]
+    return arr_data
     
 # Mengambil sebuah matriks dan integer kolom dan membuat array berisi
 # data pada kolom tersebut 
