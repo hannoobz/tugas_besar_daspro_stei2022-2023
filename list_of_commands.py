@@ -233,5 +233,28 @@ def laporanCandi(candi, role):
             print(f"ID Candi Termahal: {idmax + 1} (Rp {price_max})")
             print(f"ID Candi Termurah: {idmin + 1} (Rp {price_min})")
     
-
- 
+# F11 - Hancurkan Candi - Filbert F
+def hancurkanCandi(candi, role):
+    if role != "roro_jonggrang":
+        print("Tidak bisa akses")
+    else:
+        arr_idcandi = getArrayCol(candi, 0)
+        count = manual_len(candi) - 1
+        if count == 0:
+            print("Belum ada candi yang terbangun")
+            return candi
+        else:
+            N = input("Masukan ID Candi: ")
+            idx = findIdx(arr_idcandi, N)
+            if not(idx):
+                print("Tidak ada candi dengan ID tersebut.")
+                return candi
+            else:
+                con = input(f"Apakah anda yakin ingin menghancurkan candi ID: {N} (Y/N)?")
+                if con == "Y":
+                    candi = removeElmt(candi,idx)
+                    print("Candi telah berhasil dihancurkan.")
+                    return candi
+                else:  
+                    print("Candi gagal dihancurkan")
+                    return candi
