@@ -83,7 +83,7 @@ def summonjin(users,role):
 def laporanJin(users,bahan,candi):
     
     # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
-    count_jin = manual_len(data_user) - 3
+    count_jin = manual_len(users) - 3
     
     # matriks yang berisi hanya data (judul tidak diproses)
     data_user = removeFirstRow(users)
@@ -178,12 +178,11 @@ def laporanJin(users,bahan,candi):
  
 
 # F10 - Laporan Candi - Filbert F
-def laporanCandi():
+def laporanCandi(candi):
     # Membaca data
-    arr_candi = loader("candi.csv")
-    data_candi = getData(arr_candi) # Bernilai False jika arr_candi kosong
+    count_candi = manual_len(candi) - 1
 
-    if not(data_candi): #array kosong
+    if count == 0: # array kosong
         print(f"Total Candi: 0")
         print(f"Total Pasir yang digunakan: 0")
         print(f"Total Batu yang digunakan: 0")
@@ -191,7 +190,10 @@ def laporanCandi():
         print(f"ID Candi Termahal: -")
         print(f"ID Candi Termurah: -")
     
-    else: #arr_candi tidak kosong
+    # Menghapus row judul
+    data_candi = removeFirstRow(candi)
+    
+    else: #candi tidak kosong
         # Mencari Total Candi
         count = manual_len(data_candi)
 
