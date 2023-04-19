@@ -258,3 +258,23 @@ def hancurkanCandi(candi, role):
                 else:  
                     print("Candi gagal dihancurkan")
                     return candi
+
+# F12 - Ayam Berkokok - Filbert F
+def ayamBerkokok(candi, role):
+    if role != "roro_jonggrang":
+        print("Tidak bisa akses.")
+    
+    else:
+        count_candi = manual_len(candi) - 1
+        print("Kukuruyuk.. Kukuruyuk..")
+        print(f"Jumlah Candi: {count_candi}")
+
+        if count_candi<100:
+            print("Selamat, Roro Jonggrang memenangkan permainan!")
+            print("*Bandung Bondowoso angry noise*")
+            print("Roro Jonggrang dikutuk menjadi candi.")
+            # exit()
+            
+        else:
+            print("Yah, Bandung Bondowoso memenangkan permainan!")
+            #exit()
