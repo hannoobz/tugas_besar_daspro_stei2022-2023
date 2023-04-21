@@ -292,3 +292,64 @@ def save(users,candi,bahan_bangunan):
     arrtocsv(users,"save/"+str(folder_name)+"/user.csv",3)
     arrtocsv(candi,"save/"+str(folder_name)+"/candi.csv",5)
     arrtocsv(bahan_bangunan,"save/"+str(folder_name)+"/bahan_bangunan.csv",3)
+    
+# F15 - Help - HaniefFN
+def helpgame(role):
+    print("=========== HELP ===========")
+    if role=="":
+        print("1. login")
+        print("   Untuk masuk menggunakan akun")
+        print("2. exit")
+        print("   Untuk keluar dari program dan kembali ke terminal")
+    if role=="bandung_bondowoso":
+        print("1. logout")
+        print("   Untuk keluar dari akun yang digunakan sekarang")
+        print("2. summonjin")
+        print("   Untuk memanggil jin")
+        print("3. hapusjin")
+        print("   Untuk menghapus jin")
+        print("4. ubahjin")
+        print("   Untuk mengubah tipe jin")
+        print("5. batchbangun")
+        print("   Untuk mengerahkan seluruh jin untuk membangun candi")
+        print("6. batchkumpul")
+        print("   Untuk mengerahkan seluruh jin untuk mengumpulkan resource candi")
+        print("7. laporanjin")
+        print("   Untuk mengambil laporan kinerja para jin")
+        print("8. laporancandi")
+        print("   Untuk mengambil laporan pembangunan candi")
+        print("9. exit")
+        print("   Untuk keluar dari program dan kembali ke terminal")
+    if role=="jin_pembangun":
+        print("1. logout")
+        print("   Untuk keluar dari akun yang digunakan sekarang")
+        print("2. bangun")
+        print("   Untuk membangun candi")
+        print("3. exit")
+        print("   Untuk keluar dari program dan kembali ke terminal")
+    if role=="jin_pengumpul":
+        print("1. logout")
+        print("   Untuk keluar dari akun yang digunakan sekarang")
+        print("2. kumpul")
+        print("   Untuk mengumpulkan resource candi")
+        print("3. exit")
+        print("   Untuk keluar dari program dan kembali ke terminal")
+    if role=="roro_jonggrang":
+        print("1. logout")
+        print("   Untuk keluar dari akun yang digunakan sekarang")
+        print("2. hancurkancandi")
+        print("   Untuk menghancurkan candi yang tersedia")
+        print("3. ayamberkokok")
+        print("   Untuk memalsukan pagi hari dan menyelesaikan permainan")
+        print("4. exit")
+        print("   Untuk keluar dari program dan kembali ke terminal")
+
+
+# F16 - Exit - HaniefFN
+def exitgame(users,candi,bahan_bangunan):
+    pilihan = str(input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) "))
+    if pilihan=="Y" or pilihan=="y":
+        save(users,candi,bahan_bangunan)
+        exit()
+    if pilihan=="N" or pilihan=="n":
+        exit()  
