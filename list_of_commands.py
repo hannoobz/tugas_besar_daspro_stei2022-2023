@@ -282,16 +282,11 @@ def ayamBerkokok(candi, role):
 # F14 - Save - HaniefFN
 def save(users,candi,bahan_bangunan):
     folder_name = str(input("Masukkan nama folder: "))
-    if os.path.exists("save/"+str(folder_name)):
-        print("\n")
-        print("Saving...\n")
-        print("Berhasil menyimpan data di folder",folder_name)
-    else:
-        print("\n")
-        print("Saving...\n")
+    print("\n")
+    print("Saving...\n")
+    if not os.path.exists("save/"+str(folder_name)):
         print("Membuat folder",folder_name,"\n")
-        print("Berhasil menyimpan data di folder",folder_name)
-
+    print("Berhasil menyimpan data di folder",folder_name)
     os.makedirs(os.getcwd()+"/"+"save/"+folder_name,exist_ok=True)
     arrtocsv(users,"save/"+str(folder_name)+"/user.csv",3)
     arrtocsv(candi,"save/"+str(folder_name)+"/candi.csv",5)
