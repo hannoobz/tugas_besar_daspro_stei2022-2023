@@ -137,3 +137,13 @@ def removeElmt(arr,id):
             new_arr[c] = arr[i]
             c += 1
     return new_arr
+
+# arrtocsv, memasukkan array ke file csv
+def arrtocsv(arr,filename,col):
+    csv_file = open(filename,"w")
+    for i in range(manual_len(arr)):
+        for j in range(col):
+            csv_file.write(arr[i][j])
+            csv_file.write(";")
+        csv_file.write("\n")
+    csv_file.close()
