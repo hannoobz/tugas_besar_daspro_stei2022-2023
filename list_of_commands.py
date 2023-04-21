@@ -15,19 +15,19 @@ def login(users,role,username):
                 print("\nSelamat datang,",username+"!")
                 print("Masukkan command “help” untuk daftar command yang dapat kamu panggil.")
                 role = users[iteration][2]
+                return role,username
             else:
                 print("\nPassword Salah!")
-            break
+                return "",""
         if users[iteration]==';EOP':
             print("\nUsername tidak terdaftar!")
-            break
+            return "",""
         iteration += 1
-    return role,username
 
 #F02 - Logout - HaniefFN
 def logout(role):
     if role !="":
-        return ""
+        return "",""
     else:
         print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
@@ -77,13 +77,204 @@ def summonjin(users,role):
         print("Membacakan mantra...")
         print(f"Jin {UnameJin} berhasil dipanggil!")
         return manual_append(users,[UnameJin,PassJin,Tipe])
+ 
+# F09 - Laporan Jin - Filbert F
+def laporanJin(users,bahan,candi, role):
     
+    if role != "bandung_bondowoso":
+        print ("Tidak bisa akses")
+    
+    else:
+        # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
+        count_jin = manual_len(users) - 3
 
+        # matriks yang berisi hanya data (judul tidak diproses)
+        data_user = removeFirstRow(users)
+        data_bahan = removeFirstRow(bahan)
+        data_candi = removeFirstRow(candi)
+
+        count_pengumpul = 0
+        count_pembangun = 0
+        for i in range(manual_len(data_user)):
+            if data_user[i][2] == "jin_pengumpul":
+                count_pengumpul += 1
+            if data_user[i][2] == "jin_pembangun":
+                count_pembangun += 1
+
+        # Mencari Jin Termalas dan Terajin
+        # Array ini berisi nama jin yang memiliki role "pembangun"
+        arr_pembangun = [0 for i in range(count_pembangun + 1)]
+        n = 0
+        for i in range(manual_len(data_user)):
+            if data_user[i][2] == 'jin_pembangun':
+                arr_pembangun[n] = data_user[i][0]
+                n += 1
+        arr_pembangun[n] = ";EOP"
+
+        # Array ini berisi kolom pada matriks data_candi yang mendata pembuat candi
+        arr_candi_pembangun = getArrayCol(data_candi,1)
+
+        # Array ini berhubungan dengan arr_pembangun dan menuliskan banyaknya elemen pada
+        # arr_pembangun keluar pada arr_candi_pembangun
+        arr_banyakcandi = [0 for i in range(manual_len(arr_pembangun) + 1)]
+        for i in range(manual_len(arr_pembangun)):
+            arr_banyakcandi[i] = howManyX(arr_candi_pembangun, arr_pembangun[i])
+        arr_banyakcandi[manual_len(arr_pembangun)] = ";EOP"
+
+        # Jika jumlah jin pembangun = 0
+        if count_pembangun == 0:
+            jin_malas = "-"
+            jin_rajin = "-"
+
+        # Jika jumlah jin pembangun > 0
+        else:
+            max = arr_banyakcandi[0]
+            min = arr_banyakcandi[0]
+            id_malas = 0
+            id_rajin = 0
+
+            for i in range(manual_len(arr_banyakcandi)):
+                if arr_banyakcandi[i] > max: # Kondisi 1
+                    id_rajin = i
+                    max = arr_banyakcandi[i]
+                elif arr_banyakcandi[i] == max: # Kondisi 2
+                    if firstLetter(arr_pembangun[i]) < firstLetter(arr_pembangun[id_rajin]):
+                        id_rajin = i
+                        max = arr_banyakcandi[i]
+
+                if arr_banyakcandi[i] < min: # Kondisi 1
+                    id_malas = i
+                    min = arr_banyakcandi[i]
+                elif arr_banyakcandi[i] == min: # Kondisi 2
+                    if firstLetter(arr_pembangun[i]) > firstLetter(arr_pembangun[id_malas]):
+                        id_malas = i
+                        min = arr_banyakcandi[i]
+
+            jin_malas = arr_pembangun[id_malas]
+            jin_rajin = arr_pembangun[id_rajin]
+
+        # Mencari Jumlah Pasir, Batu, dan Air yang digunakan
+        sum_pasir = 0
+        sum_batu = 0
+        sum_air = 0
+
+        if not(data_bahan): # Jika data_bahan kosong
+            pass
+        else:
+            for i in range(manual_len(data_bahan)):
+                if data_bahan[i][0] == "Pasir":
+                    sum_pasir += int(data_bahan[i][2])
+                if data_bahan[i][0] == "Batu":
+                    sum_batu += int(data_bahan[i][2])
+                if data_bahan[i][0] == "Air":
+                    sum_air += int(data_bahan[i][2])
+
+        # Mengeprint Hasil
+        print(f"Total Jin: {count_jin}")
+        print(f"Total Jin Pengumpul: {count_pengumpul}")
+        print(f"Total Jin Pembangun: {count_pembangun}")
+        print(f"Jin Terajin: {jin_rajin}")
+        print(f"Jin Termalas: {jin_malas}")
+        print(f"Jumlah Pasir: {sum_pasir} unit")
+        print(f"Jumlah Batu: {sum_batu} unit")
+        print(f"Jumlah Air: {sum_air} unit")
+ 
+
+# F10 - Laporan Candi - Filbert F
+def laporanCandi(candi, role):
+    
+    if role != "bandung_bondowoso":
+        print("Tidak bisa akses")
         
+    else:
+        # Membaca data
+        count = manual_len(candi) - 1
 
+        if count == 0: # array kosong
+            print(f"Total Candi: 0")
+            print(f"Total Pasir yang digunakan: 0")
+            print(f"Total Batu yang digunakan: 0")
+            print(f"Total Air yang digunakan: 0")
+            print(f"ID Candi Termahal: -")
+            print(f"ID Candi Termurah: -")
+
+        else:#candi tidak kosong
+            # Menghapus row judul
+            data_candi = removeFirstRow(candi)  
+
+
+            # Mencari Total Pasir, Batu, dan Air Digunakan
+            sum_pasir = sumArray(getArrayCol(data_candi,2))
+            sum_batu = sumArray(getArrayCol(data_candi,3))
+            sum_air = sumArray(getArrayCol(data_candi,4))
+
+            # Mencari Candi Termahal dan Termurah
+            arr_bahan = [0 for i in range(manual_len(data_candi) + 1)]
+            for i in range(manual_len(data_candi)):
+                arr_bahan[i] = getArrayRow(data_candi, i, 2, 5)
+            arr_bahan[manual_len(data_candi)] = ";EOP"
+
+            arr_sumBahan = [0 for i in range(manual_len(arr_bahan) + 1)]
+            for i in range(manual_len(arr_bahan)):
+                arr_sumBahan[i] = sumArray(arr_bahan[i])
+            arr_sumBahan[manual_len(arr_bahan)] = ";EOP"
+
+            idmax = maxArrayID(arr_sumBahan)
+            idmin = minArrayID(arr_sumBahan)
+
+            price_max = (int(arr_bahan[idmax][0]) * 10000) + (int(arr_bahan[idmax][1]) * 15000) + (int(arr_bahan[idmax][2]) *7500)
+            price_min = (int(arr_bahan[idmin][0]) * 10000) + (int(arr_bahan[idmin][1]) * 15000) + (int(arr_bahan[idmin][2]) *7500)
+
+            # Mengeprint Hasil
+            print(f"Total Candi: {count}")
+            print(f"Total Pasir yang digunakan: {sum_pasir}")
+            print(f"Total Batu yang digunakan: {sum_batu}")
+            print(f"Total Air yang digunakan: {sum_air}")
+            print(f"ID Candi Termahal: {idmax + 1} (Rp {price_max})")
+            print(f"ID Candi Termurah: {idmin + 1} (Rp {price_min})")
+    
+# F11 - Hancurkan Candi - Filbert F
+def hancurkanCandi(candi, role):
+    if role != "roro_jonggrang":
+        print("Tidak bisa akses")
+    else:
+        arr_idcandi = getArrayCol(candi, 0)
+        count = manual_len(candi) - 1
+        if count == 0:
+            print("Belum ada candi yang terbangun")
+            return candi
+        else:
+            N = input("Masukan ID Candi: ")
+            idx = findIdx(arr_idcandi, N)
+            if not(idx):
+                print("Tidak ada candi dengan ID tersebut.")
+                return candi
+            else:
+                con = input(f"Apakah anda yakin ingin menghancurkan candi ID: {N} (Y/N)?")
+                if con == "Y":
+                    candi = removeElmt(candi,idx)
+                    print("Candi telah berhasil dihancurkan.")
+                    return candi
+                else:  
+                    print("Candi gagal dihancurkan")
+                    return candi
+
+# F12 - Ayam Berkokok - Filbert F
+def ayamBerkokok(candi, role):
+    if role != "roro_jonggrang":
+        print("Tidak bisa akses.")
+    
+    else:
+        count_candi = manual_len(candi) - 1
+        print("Kukuruyuk.. Kukuruyuk..")
+        print(f"Jumlah Candi: {count_candi}")
+
+        if count_candi<100:
+            print("Selamat, Roro Jonggrang memenangkan permainan!")
+            print("*Bandung Bondowoso angry noise*")
+            print("Roro Jonggrang dikutuk menjadi candi.")
+            # exit()
             
-
-
-
-    
-    
+        else:
+            print("Yah, Bandung Bondowoso memenangkan permainan!")
+            #exit()
