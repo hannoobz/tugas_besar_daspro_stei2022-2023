@@ -29,3 +29,5 @@ def runner(string_command):
         laporanCandi(candi,role)
     if string_command =="hancurkancandi":
         hancurkanCandi(candi,role)
+    if string_command =="save":
+        save(users,candi,bahan_bangunan)
