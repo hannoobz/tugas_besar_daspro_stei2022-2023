@@ -31,3 +31,7 @@ def runner(string_command):
         hancurkanCandi(candi,role)
     if string_command =="save":
         save(users,candi,bahan_bangunan)
+    if string_command =="exit":
+        exitgame(users,candi,bahan_bangunan)
+    if string_command =="help":
+        helpgame(role)
