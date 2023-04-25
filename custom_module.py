@@ -98,18 +98,18 @@ def maxArrayID(arr, max, id):
     else:
         if arr[0] > max:
             max = arr[0]
-            id = len(arr) - 1
+            id = manual_len(arr) - 1
         return maxArrayID(removeFirstRow(arr) , max, id)
 
 # Mengeluarkan ID integer minimum dalam sebuah array integer (RECURSIVE)
-def maxArrayID(arr, min, id):
+def minArrayID(arr, min, id):
     if manual_len(arr) == 0:
         return id
     else:
-        if arr[0] < max:
+        if arr[0] < min:
             min = arr[0]
-            id = len(arr) - 1
-        return maxArrayID(removeFirstRow(arr) , min, id)
+            id = manual_len(arr) - 1
+        return minArrayID(removeFirstRow(arr) , min, id)
 
 # Mengeluarkan huruf pertama dari sebuah character
 def firstLetter(char):
