@@ -83,45 +83,46 @@ def getArrayRow(arr, row, col1, col2):
     arrRow[col2-col1] = ";EOP"
     return(arrRow)
 
-# Mengeluarkan jumlah dari semua elemen dalam array integer
+# Mengeluarkan jumlah dari semua elemen dalam array integer (RECURSIVE)
 def sumArray(arr):
-    sum = 0
-    for i in range(manual_len(arr)):
-        sum += int(arr[i])
-    return sum
+    if manual_len(arr) == 0:
+        return 0
+    else:
+        for i in range(manual_len(arr)):
+            return int(arr[0]) + sumArray(removeFirstRow(arr))
 
-# Mengeluarkan ID integer maksimum dalam sebuah array integer
-def maxArrayID(arr):
-    max = arr[0]
-    id = 0
-    for i in range(manual_len(arr)):
-        if arr[i] > max:
-            max = arr[i]
-            id = i
-    return id
+# Mengeluarkan ID integer maksimum dalam sebuah array integer (RECURSIVE)
+def maxArrayID(arr, max, id):
+    if manual_len(arr) == 0:
+        return id
+    else:
+        if arr[0] > max:
+            max = arr[0]
+            id = len(arr) - 1
+        return maxArrayID(removeFirstRow(arr) , max, id)
 
-# Mengeluarkan ID integer minimum dalam sebuah array integer
-def minArrayID(arr):
-    min = arr[0]
-    id = 0
-    for i in range(manual_len(arr)):
-        if arr[i] < min:
-            min = arr[i]
-            id = i
-    return id
+# Mengeluarkan ID integer minimum dalam sebuah array integer (RECURSIVE)
+def maxArrayID(arr, min, id):
+    if manual_len(arr) == 0:
+        return id
+    else:
+        if arr[0] < max:
+            min = arr[0]
+            id = len(arr) - 1
+        return maxArrayID(removeFirstRow(arr) , min, id)
 
 # Mengeluarkan huruf pertama dari sebuah character
 def firstLetter(char):
     for i in char:
         return i
 
-# Menguluarkan banyaknya x muncul dalam array
-def howManyX(arr,x):
-    count = 0
-    for i in range(manual_len(arr)):
-        if arr[i] == x:
-            count+=1
-    return count
+# Menguluarkan banyaknya x muncul dalam array (RECURSIVE)
+def howManyX(arr, x, count):
+    if manual_len(arr) == 0:
+        return count
+    elif arr[0] == x:
+        count += 1
+    return howManyX(removeFirstRow(arr), x, count)
 
 def findIdx(arr,x):
     for i in range(manual_len(arr)):
