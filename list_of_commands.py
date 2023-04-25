@@ -118,8 +118,13 @@ def laporanJin(users,bahan,candi, role):
         # Array ini berhubungan dengan arr_pembangun dan menuliskan banyaknya elemen pada
         # arr_pembangun keluar pada arr_candi_pembangun
         arr_banyakcandi = [0 for i in range(manual_len(arr_pembangun) + 1)]
+        
         for i in range(manual_len(arr_pembangun)):
-            arr_banyakcandi[i] = howManyX(arr_candi_pembangun, arr_pembangun[i])
+            
+            count = 0
+            count_banyakcandi = howManyX(arr_candi_pembangun, arr_pembangun[i], count)
+            arr_banyakcandi[i] = temp
+            
         arr_banyakcandi[manual_len(arr_pembangun)] = ";EOP"
 
         # Jika jumlah jin pembangun = 0
@@ -220,9 +225,14 @@ def laporanCandi(candi, role):
             for i in range(manual_len(arr_bahan)):
                 arr_sumBahan[i] = sumArray(arr_bahan[i])
             arr_sumBahan[manual_len(arr_bahan)] = ";EOP"
-
-            idmax = maxArrayID(arr_sumBahan)
-            idmin = minArrayID(arr_sumBahan)
+            
+            max = arr_sumBahan[0]
+            id = 0
+            idmax = maxArrayID(arr_sumBahan, max, id)
+            
+            min = arr_sumBahan[0]
+            id = 0
+            idmin = minArrayID(arr_sumBahan, min, id)
 
             price_max = (int(arr_bahan[idmax][0]) * 10000) + (int(arr_bahan[idmax][1]) * 15000) + (int(arr_bahan[idmax][2]) *7500)
             price_min = (int(arr_bahan[idmin][0]) * 10000) + (int(arr_bahan[idmin][1]) * 15000) + (int(arr_bahan[idmin][2]) *7500)
