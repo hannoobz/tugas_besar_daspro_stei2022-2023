@@ -171,6 +171,7 @@ def laporanJin(users,bahan,candi, role):
                     sum_air += int(data_bahan[i][2])
 
         # Mengeprint Hasil
+        print("="*11 + "\nLaporan Jin" + "\n" + "="*11)
         print(f"Total Jin: {count_jin}")
         print(f"Total Jin Pengumpul: {count_pengumpul}")
         print(f"Total Jin Pembangun: {count_pembangun}")
@@ -227,6 +228,7 @@ def laporanCandi(candi, role):
             price_min = (int(arr_bahan[idmin][0]) * 10000) + (int(arr_bahan[idmin][1]) * 15000) + (int(arr_bahan[idmin][2]) *7500)
 
             # Mengeprint Hasil
+            print("="*13 + "\nLaporan Candi" + "\n" + "="*13)
             print(f"Total Candi: {count}")
             print(f"Total Pasir yang digunakan: {sum_pasir}")
             print(f"Total Batu yang digunakan: {sum_batu}")
@@ -247,19 +249,20 @@ def hancurkanCandi(candi, role):
         else:
             N = input("Masukan ID Candi: ")
             idx = findIdx(arr_idcandi, N)
-            if not(idx):
+            while not(idx):
                 print("Tidak ada candi dengan ID tersebut.")
-                return candi
-            else:
-                con = input(f"Apakah anda yakin ingin menghancurkan candi ID: {N} (Y/N)?")
-                if con == "Y":
-                    candi = removeElmt(candi,idx)
-                    print("Candi telah berhasil dihancurkan.")
-                    return candi
-                else:  
-                    print("Candi gagal dihancurkan")
-                    return candi
+                N = input("Masukan ID Candi: ")
+                idx = findIdx(arr_idcandi, N)
 
+            con = input(f"Apakah anda yakin ingin menghancurkan candi ID: {N} (Y/N)?")
+            if con == "Y":
+                candi = removeElmt(candi,idx)
+                print("Candi telah berhasil dihancurkan.")
+                return candi
+            else:  
+                print("Candi gagal dihancurkan")
+                return candi
+            
 # F12 - Ayam Berkokok - Filbert F
 def ayamBerkokok(candi, role):
     if role != "roro_jonggrang":
