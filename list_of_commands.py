@@ -123,7 +123,7 @@ def laporanJin(users,bahan,candi, role):
             
             count = 0
             count_banyakcandi = howManyX(arr_candi_pembangun, arr_pembangun[i], count)
-            arr_banyakcandi[i] = temp
+            arr_banyakcandi[i] = count_banyakcandi
             
         arr_banyakcandi[manual_len(arr_pembangun)] = ";EOP"
 
