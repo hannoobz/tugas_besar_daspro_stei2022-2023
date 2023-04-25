@@ -277,11 +277,11 @@ def ayamBerkokok(candi, role):
             print("Selamat, Roro Jonggrang memenangkan permainan!")
             print("*Bandung Bondowoso angry noise*")
             print("Roro Jonggrang dikutuk menjadi candi.")
-            # exit()
+            exit()
             
         else:
             print("Yah, Bandung Bondowoso memenangkan permainan!")
-            #exit()
+            exit()
             
 # F14 - Save - HaniefFN
 def save(users,candi,bahan_bangunan):
