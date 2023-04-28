@@ -113,8 +113,7 @@ def minArrayID(arr, min, id):
 
 # Mengeluarkan huruf pertama dari sebuah character
 def firstLetter(char):
-    for i in char:
-        return i
+    return char[0]
 
 # Menguluarkan banyaknya x muncul dalam array (RECURSIVE)
 def howManyX(arr, x, count):
