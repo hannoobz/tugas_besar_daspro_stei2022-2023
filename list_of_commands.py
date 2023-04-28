@@ -78,6 +78,97 @@ def summonjin(users,role):
         print("Membacakan mantra...")
         print(f"Jin {UnameJin} berhasil dipanggil!")
         return manual_append(users,[UnameJin,PassJin,Tipe])
+
+#F04 - Hapus Jin - M Raihan A
+def hapusjin(users, candi):
+    if role == 'bandung_bondowoso':
+        UnameJin = input("Masukkan username jin : ")
+        for i in range(manual_len(users)):
+            if UnameJin == users[i][0]:
+                indexJin = i
+                Pilihan=input(f'Apakah anda yakin ingin menghapus jin dengan username {UnameJin} (Y/N)? ')
+                if Pilihan == 'N':
+                    break
+                elif Pilihan == 'Y':
+                    users[i][0],users[i][1],users[i][2] = "" #Bagian modifikasi file user.csv 
+                    for j in range(i, len(users)):
+                        users[j][0],users[j][1],users[j][2] = users[j+1][0],users[j+1][1],users[j+1][2]
+                    for k in range(manual_len(candi)):   #Modifikasi file candi.csv
+                        temp_candi = []
+                        if candi[k][1] != UnameJin:
+                            manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
+                    candi = temp_candi
+    else:
+        print('Role anda bukanlah bandung_bondowoso')
+       
+    
+#F05 - Ubah tipe Jin - M Raihan A
+def ubahjin(users):
+    if users.role == 'bandung_bondowoso':
+        jinGanti = input('Masukkan username jin : ')
+        for i in range(3, manual_len(users)):
+            if users[i][0] == jinGanti:
+                ada=1
+                if users[i][2] == 'jin_pengumpul':
+                    ganti = input("Jin ini bertipe "'Pengumpul'". Yakin ingin mengubah ke tipe "'Pembangun'" (Y/N)? ")
+                    if ganti == 'Y':
+                        users[i][2] = 'jin_pembangun'
+                        print('Jin telah berhasil diubah')
+                    elif ganti == 'N':
+                        break
+                elif users [i][2] =='jin_pembangun':
+                    ganti = input("Jin ini bertipe "'Pembangun'". Yakin ingin mengubah ke tipe "'Pengumpul'" (Y/N)? ")
+                    if ganti == 'Y':
+                        users[i][2] = 'jin_pengumpul'
+                        print('Jin telah berhasil diubah')
+                    elif ganti == 'N':
+                        break
+        if ada=0:
+            print('Tidak ada jin dengan username tersebut')
+            break
+    else:
+        print('user anda bukanlah bandung bondowoso')
+        
+        
+#F06 - Bangun Candi - M Raihan A
+def bangun(users, bahan_bangunan, candi): #Muhammad Raihan Ariffiato
+    PasirButuh = random.randint(1, 5)
+    BatuButuh = random.randint(1, 5)
+    AirButuh = random.randint(1, 5)
+    pasir =  bahan_bangunan[1][2]
+    batu =  bahan_bangunan[2][2]
+    air =  bahan_bangunan[3][2]
+    JumlahCandi = manual_len[0] - 1
+
+    if user.role == 'Pembangun':
+        if pasir >= PasirButuh and batu >= BatuButuh and air >= AirButuh: #Memeriksa bahan bangunan dan menentukan pembangunan candi
+            JumlahCandi += 1
+            pasir -= PasirButuh; batu -= BatuButuh; air -= AirButuh
+            print('Candi berhasil dibangun'); JumlahCandi +=1
+
+            if JumlahCandi < 100:   #Menampilkan jumlah candi yang masih perlu dibangun
+                print(f'Sisa candi yang perlu dibangun: {100-JumlahCandi}.')
+            else:
+                print("Sisa candi yang perlu dibangun : 0.")
+        else:
+            print('Bahan bangunan tidak mencukupi')
+            print('Candi tidak bisa dibangun!')
+    else:
+        print('Role anda bukanlah pembangun, log in dengan akun pembangun!')
+        
+#F07 - Kumpul bahan bangunan - M Raihan A
+def kumpul(users, bahan_bangunan):
+    pasirKumpul = random.randint(0, 5) 
+    batuKumpul = random.randint(0, 5)
+    airKumpul = random.randint(0, 5)
+    pasir =  int(bahan_bangunan[1][2])
+    batu =  int(bahan_bangunan[2][2])
+    air =  int(bahan_bangunan[3][2])
+    if users.role == 'jin_pengumpul':
+        pasir += pasirKumpul; batu += batuKumpul; air += airKumpul
+        print(f'Jin menemukan {pasirKumpul} pasir, {batuKumpul} batu, {airKumpul} air.')
+    else:
+        print('Fungsi ini hanya bisa dilakukan oleh jin pengumpul')
  
 # F09 - Laporan Jin - Filbert F
 def laporanJin(users,bahan,candi, role):
