@@ -59,6 +59,8 @@ def runner(string_command):
         ubahjin(users,role)
     if string_command == "kumpul":
         bahan_bangunan[1][2],bahan_bangunan[2][2],bahan_bangunan[3][2] = kumpul(role, bahan_bangunan)
+    if string_command == "bangun":
+        candi, bahan_bangunan = bangun(users, bahan_bangunan, candi, role)
     if string_command == "debug":
         print(users)
         print(candi)
