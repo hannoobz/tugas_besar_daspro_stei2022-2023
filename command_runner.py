@@ -63,6 +63,8 @@ def runner(string_command):
         candi, bahan_bangunan = bangun(username, bahan_bangunan, candi, role)
     if string_command == "batchkumpul":
         bahan_bangunan[1][2],bahan_bangunan[2][2],bahan_bangunan[3][2] = batchkumpul(role, users, bahan_bangunan)
+    if string_command == "batchbangun":
+        candi, bahan_bangunan = batchbangun(users, bahan_bangunan, candi, role)
     if string_command == "debug":
         print(users)
         print(candi)
