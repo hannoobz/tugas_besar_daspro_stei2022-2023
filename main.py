@@ -1,7 +1,6 @@
 # File: main.py
 from command_runner import *
 import argparse
-import os
 
 Load = argparse.ArgumentParser()
 Load.add_argument("folder_dir",nargs='?',type=str)
