@@ -22,6 +22,8 @@ def loadgame(folder_dir):
             bahan_bangunan = manual_append(bahan_bangunan,['pasir',"Jumlah Pasir",0])
             bahan_bangunan = manual_append(bahan_bangunan,['batu',"Jumlah Batu",0])
             bahan_bangunan = manual_append(bahan_bangunan,['air',"Jumlah Air",0])
+        for i in range(1,manual_len(candi)):
+            candi[i][0]=int(candi[i][0])
         print("Loading...")
         print("Selamat datang di program “Manajerial Candi”")
         print("Silahkan masukkan username Anda")
@@ -44,7 +46,7 @@ def runner(string_command):
     if string_command =="laporancandi":
         laporanCandi(candi,role)
     if string_command =="hancurkancandi":
-        hancurkanCandi(candi,role)
+        candi = hancurkanCandi(candi,role)
     if string_command =="ayamberkokok":
         ayamBerkokok(candi,role)
     if string_command =="save":
