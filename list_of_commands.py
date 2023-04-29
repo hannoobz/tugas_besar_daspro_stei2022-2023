@@ -98,7 +98,6 @@ def hapusjin(users, candi, role):
                         if candi[k][1] != UnameJin:
                             manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
                     candi = temp_candi
-                    print(index_pop(users,indexJin))
                     return index_pop(users,indexJin),candi
             else:
                 pass
@@ -111,7 +110,6 @@ def hapusjin(users, candi, role):
     else:
         print('Role anda bukanlah bandung_bondowoso')
         return users,candi
-       
        
     
 #F05 - Ubah tipe Jin - M Raihan A
@@ -162,7 +160,7 @@ def bangun(username, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
             print('Candi berhasil dibangun')
 
             if (manual_len(candi)-1) < 100:   #Menampilkan jumlah candi yang masih perlu dibangun
-                print(f'Sisa candi yang perlu dibangun: {100-(manual_len(candi))}.')
+                print(f'Sisa candi yang perlu dibangun: {101-(manual_len(candi))}.')
             else:
                 print("Sisa candi yang perlu dibangun : 0.")
         else:
