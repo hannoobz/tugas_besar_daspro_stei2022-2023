@@ -84,7 +84,7 @@ def summonjin(users,role):
 def hapusjin(users, candi, role):
     if role == 'bandung_bondowoso':
         UnameJin = input("Masukkan username jin : ")
-        if UnameJin != 'bandung_bondowoso' and UnameJin != 'roro_jonggrang':
+        if UnameJin != 'Bondowoso' and UnameJin != 'Roro':
            for i in range(manual_len(users)):
             if UnameJin == users[i][0]:
                 indexJin = i
@@ -100,8 +100,10 @@ def hapusjin(users, candi, role):
                     return index_pop(users,i),candi
         else:
             print('Fungsi ini hanya ditujukan kepada jin')
+            return users,candi
     else:
         print('Role anda bukanlah bandung_bondowoso')
+        return users,candi
        
     
 #F05 - Ubah tipe Jin - M Raihan A
