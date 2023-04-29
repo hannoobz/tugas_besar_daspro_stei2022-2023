@@ -139,19 +139,22 @@ def bangun(users, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
     PasirButuh = random.randint(1, 5)
     BatuButuh = random.randint(1, 5)
     AirButuh = random.randint(1, 5)
-    pasir =  bahan_bangunan[1][2]
-    batu =  bahan_bangunan[2][2]
-    air =  bahan_bangunan[3][2]
+    pasir =  int(bahan_bangunan[1][2])
+    batu =  int(bahan_bangunan[2][2])
+    air =  int(bahan_bangunan[3][2])
 
-    if role == 'Pembangun':
+    if role == 'jin_pembangun':
         if pasir >= PasirButuh and batu >= BatuButuh and air >= AirButuh: #Memeriksa bahan bangunan dan menentukan pembangunan candi
-            new_candi = [manual_len(candi)+1, username, PasirButuh, BatuButuh, AirButuh]
+            new_candi = [manual_len(candi)-1, username, PasirButuh, BatuButuh, AirButuh]
             candi = manual_append(candi, new_candi)
-            pasir -= PasirButuh; batu -= BatuButuh; air -= AirButuh
+            bahan_bangunan[1][2] = pasir - PasirButuh
+            bahan_bangunan[2][2] = batu - BatuButuh
+            bahan_bangunan[3][2] = air - AirButuh
+            
             print('Candi berhasil dibangun')
 
             if (manual_len(candi)-1) < 100:   #Menampilkan jumlah candi yang masih perlu dibangun
-                print(f'Sisa candi yang perlu dibangun: {100-(manual_len(candi)-1)}.')
+                print(f'Sisa candi yang perlu dibangun: {100-(manual_len(candi))}.')
             else:
                 print("Sisa candi yang perlu dibangun : 0.")
         else:
@@ -159,6 +162,8 @@ def bangun(users, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
             print('Candi tidak bisa dibangun!')
     else:
         print('Role anda bukanlah pembangun, log in dengan akun pembangun!')
+
+    return candi, bahan_bangunan
         
 #F07 - Kumpul bahan bangunan - M Raihan A
 def kumpul(role, bahan_bangunan):
