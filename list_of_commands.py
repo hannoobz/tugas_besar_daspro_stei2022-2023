@@ -175,7 +175,34 @@ def kumpul(role, bahan_bangunan):
     else:
         print('Fungsi ini hanya bisa dilakukan oleh jin pengumpul')
         return pasir,batu,air
- 
+    
+# FO8 - Batch kumpul/bangun - Filbert F
+def batchkumpul(role, users, bahan_bangunan):
+    pasir =  int(bahan_bangunan[1][2])
+    batu =  int(bahan_bangunan[2][2])
+    air =  int(bahan_bangunan[3][2])
+    if role != "bandung_bondowoso":
+        print(f"Tidak bisa akses dengan role {role}")
+        return pasir,batu,air
+    else:
+        arr_role = getArrayCol(users, 2)
+        count_pengumpul = 0
+        count_pengumpul = howManyX(arr_role, "jin_pengumpul", count_pengumpul)
+
+        sumpasirKumpul = 0
+        sumbatuKumpul = 0
+        sumairKumpul = 0
+        for i in range(count_pengumpul):
+            sumpasirKumpul += random.randint(0, 5) 
+            sumbatuKumpul += random.randint(0, 5)
+            sumairKumpul += random.randint(0, 5)
+
+        print(f"Mengerahkan {count_pengumpul} jin untuk mengumpulkan bahan.")
+        print(f"Jin menemukan total {sumpasirKumpul} pasir, {sumbatuKumpul} batu, {sumairKumpul} air.")
+        pasir += sumpasirKumpul; batu += sumbatuKumpul; air += sumairKumpul
+        return pasir,batu,air
+#batch bangun nyusul
+
 # F09 - Laporan Jin - Filbert F
 def laporanJin(users,bahan,candi, role):
     
