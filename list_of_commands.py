@@ -189,19 +189,23 @@ def batchkumpul(role, users, bahan_bangunan):
         count_pengumpul = 0
         count_pengumpul = howManyX(arr_role, "jin_pengumpul", count_pengumpul)
 
-        sumpasirKumpul = 0
-        sumbatuKumpul = 0
-        sumairKumpul = 0
-        for i in range(count_pengumpul):
-            sumpasirKumpul += random.randint(0, 5) 
-            sumbatuKumpul += random.randint(0, 5)
-            sumairKumpul += random.randint(0, 5)
+        if count_pengumpul == 0 :
+            # Output pesan Tidak ada jin pengumpul
+            return pasir,batu,air
+        else:
+            sumpasirKumpul = 0
+            sumbatuKumpul = 0
+            sumairKumpul = 0
+            for i in range(count_pengumpul):
+                sumpasirKumpul += random.randint(0, 5) 
+                sumbatuKumpul += random.randint(0, 5)
+                sumairKumpul += random.randint(0, 5)
 
-        print(f"Mengerahkan {count_pengumpul} jin untuk mengumpulkan bahan.")
-        print(f"Jin menemukan total {sumpasirKumpul} pasir, {sumbatuKumpul} batu, {sumairKumpul} air.")
-        pasir += sumpasirKumpul; batu += sumbatuKumpul; air += sumairKumpul
-        return pasir,batu,air
-#batch bangun nyusul
+            print(f"Mengerahkan {count_pengumpul} jin untuk mengumpulkan bahan.")
+            print(f"Jin menemukan total {sumpasirKumpul} pasir, {sumbatuKumpul} batu, {sumairKumpul} air.")
+            pasir += sumpasirKumpul; batu += sumbatuKumpul; air += sumairKumpul
+            return pasir,batu,air
+
 
 # F09 - Laporan Jin - Filbert F
 def laporanJin(users,bahan,candi, role):
