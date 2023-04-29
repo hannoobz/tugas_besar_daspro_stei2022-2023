@@ -98,7 +98,7 @@ def hapusjin(users, candi, role):
                         if candi[k][1] != UnameJin:
                             manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
                     candi = temp_candi
-                    return index_pop(users,indexJin),candi
+                    return removeElmt(users,indexJin),candi
             else:
                 pass
         else:
@@ -148,10 +148,15 @@ def bangun(username, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
     air =  int(bahan_bangunan[3][2])
+    id_candi = 0
+
+    for i in range(1,manual_len(candi)):
+        if id_candi<=int(candi[i][0]):
+            id_candi = int(candi[i][0])+1
 
     if role == 'jin_pembangun':
         if pasir >= PasirButuh and batu >= BatuButuh and air >= AirButuh: #Memeriksa bahan bangunan dan menentukan pembangunan candi
-            new_candi = [manual_len(candi)-1, username, PasirButuh, BatuButuh, AirButuh]
+            new_candi = [id_candi, username, PasirButuh, BatuButuh, AirButuh]
             candi = manual_append(candi, new_candi)
             bahan_bangunan[1][2] = pasir - PasirButuh
             bahan_bangunan[2][2] = batu - BatuButuh
@@ -188,6 +193,35 @@ def kumpul(role, bahan_bangunan):
         return pasir,batu,air
     
 # FO8 - Batch kumpul/bangun - Filbert F
+def batchkumpul(role, users, bahan_bangunan):
+    pasir =  int(bahan_bangunan[1][2])
+    batu =  int(bahan_bangunan[2][2])
+    air =  int(bahan_bangunan[3][2])
+    if role != "bandung_bondowoso":
+        print(f"Tidak bisa akses dengan role {role}")
+        return pasir,batu,air
+    else:
+        arr_role = getArrayCol(users, 2)
+        count_pengumpul = 0
+        count_pengumpul = howManyX(arr_role, "jin_pengumpul", count_pengumpul)
+
+        if count_pengumpul == 0 :
+            # Output pesan Tidak ada jin pengumpul
+            return pasir,batu,air
+        else:
+            sumpasirKumpul = 0
+            sumbatuKumpul = 0
+            sumairKumpul = 0
+            for i in range(count_pengumpul):
+                sumpasirKumpul += random.randint(0, 5) 
+                sumbatuKumpul += random.randint(0, 5)
+                sumairKumpul += random.randint(0, 5)
+
+            print(f"Mengerahkan {count_pengumpul} jin untuk mengumpulkan bahan.")
+            print(f"Jin menemukan total {sumpasirKumpul} pasir, {sumbatuKumpul} batu, {sumairKumpul} air.")
+            pasir += sumpasirKumpul; batu += sumbatuKumpul; air += sumairKumpul
+            return pasir,batu,air
+
 def batchbangun(users, bahan_bangunan, candi, role):
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
@@ -215,6 +249,11 @@ def batchbangun(users, bahan_bangunan, candi, role):
             SumAirButuh = 0
             newCandi = [0 for i in range(count_pembangun+1)]
             newCandi[count_pembangun] = ";EOP"
+            
+            id_candi = 0
+            for i in range(1,manual_len(candi)):
+                if id_candi<=int(candi[i][0]):
+                    id_candi = int(candi[i][0])+1
 
             for i in range(count_pembangun):
                 PasirButuh = random.randint(1, 5)
@@ -225,8 +264,8 @@ def batchbangun(users, bahan_bangunan, candi, role):
                 SumBatuButuh += BatuButuh
                 SumAirButuh += AirButuh
 
-                newCandi[i] = [(manual_len(candi)+i), arrusernamepembangun[i], PasirButuh, BatuButuh, AirButuh]
-                
+                newCandi[i] = [id_candi+i, arrusernamepembangun[i], PasirButuh, BatuButuh, AirButuh]
+
             print(f"Mengerahkan {count_pembangun} jin untuk membangun candi dengan total {SumPasirButuh} pasir, {SumBatuButuh} batu, dan {SumAirButuh} air.")
             count_newcandi = manual_len(newCandi)
             if (manual_len(candi) + count_newcandi)  > 100:
@@ -266,35 +305,6 @@ def batchbangun(users, bahan_bangunan, candi, role):
                     bahan_bangunan[2][2] = batu - SumBatuButuh
                     bahan_bangunan[3][2] = air - SumAirButuh
                     return candi, bahan_bangunan
-                
-def batchkumpul(role, users, bahan_bangunan):
-    pasir =  int(bahan_bangunan[1][2])
-    batu =  int(bahan_bangunan[2][2])
-    air =  int(bahan_bangunan[3][2])
-    if role != "bandung_bondowoso":
-        print(f"Tidak bisa akses dengan role {role}")
-        return pasir,batu,air
-    else:
-        arr_role = getArrayCol(users, 2)
-        count_pengumpul = 0
-        count_pengumpul = howManyX(arr_role, "jin_pengumpul", count_pengumpul)
-
-        if count_pengumpul == 0 :
-            # Output pesan Tidak ada jin pengumpul
-            return pasir,batu,air
-        else:
-            sumpasirKumpul = 0
-            sumbatuKumpul = 0
-            sumairKumpul = 0
-            for i in range(count_pengumpul):
-                sumpasirKumpul += random.randint(0, 5) 
-                sumbatuKumpul += random.randint(0, 5)
-                sumairKumpul += random.randint(0, 5)
-
-            print(f"Mengerahkan {count_pengumpul} jin untuk mengumpulkan bahan.")
-            print(f"Jin menemukan total {sumpasirKumpul} pasir, {sumbatuKumpul} batu, {sumairKumpul} air.")
-            pasir += sumpasirKumpul; batu += sumbatuKumpul; air += sumairKumpul
-            return pasir,batu,air
 
 
 # F09 - Laporan Jin - Filbert F
@@ -458,18 +468,16 @@ def hancurkanCandi(candi, role):
             print("Belum ada candi yang terbangun")
             return candi
         else:
-            N = input("Masukan ID Candi: ")
+            N = int(input("Masukan ID Candi: "))
             idx = findIdx(arr_idcandi, N)
             while not(idx):
                 print("Tidak ada candi dengan ID tersebut.")
-                N = input("Masukan ID Candi: ")
+                N = int(input("Masukan ID Candi: "))
                 idx = findIdx(arr_idcandi, N)
-
             con = input(f"Apakah anda yakin ingin menghancurkan candi ID: {N} (Y/N)?")
             if con == "Y":
-                candi = removeElmt(candi,idx)
                 print("Candi telah berhasil dihancurkan.")
-                return candi
+                return removeElmt(candi,idx)
             else:  
                 print("Candi gagal dihancurkan")
                 return candi
