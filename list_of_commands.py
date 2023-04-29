@@ -142,16 +142,16 @@ def bangun(users, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
     pasir =  bahan_bangunan[1][2]
     batu =  bahan_bangunan[2][2]
     air =  bahan_bangunan[3][2]
-    JumlahCandi = manual_len[0] - 1
 
     if role == 'Pembangun':
         if pasir >= PasirButuh and batu >= BatuButuh and air >= AirButuh: #Memeriksa bahan bangunan dan menentukan pembangunan candi
-            JumlahCandi += 1
+            new_candi = [manual_len(candi)+1, username, PasirButuh, BatuButuh, AirButuh]
+            candi = manual_append(candi, new_candi)
             pasir -= PasirButuh; batu -= BatuButuh; air -= AirButuh
-            print('Candi berhasil dibangun'); JumlahCandi +=1
+            print('Candi berhasil dibangun')
 
-            if JumlahCandi < 100:   #Menampilkan jumlah candi yang masih perlu dibangun
-                print(f'Sisa candi yang perlu dibangun: {100-JumlahCandi}.')
+            if (manual_len(candi)-1) < 100:   #Menampilkan jumlah candi yang masih perlu dibangun
+                print(f'Sisa candi yang perlu dibangun: {100-(manual_len(candi)-1)}.')
             else:
                 print("Sisa candi yang perlu dibangun : 0.")
         else:
