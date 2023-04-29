@@ -222,6 +222,85 @@ def batchkumpul(role, users, bahan_bangunan):
             pasir += sumpasirKumpul; batu += sumbatuKumpul; air += sumairKumpul
             return pasir,batu,air
 
+def batchbangun(users, bahan_bangunan, candi, role):
+    pasir =  int(bahan_bangunan[1][2])
+    batu =  int(bahan_bangunan[2][2])
+    air =  int(bahan_bangunan[3][2])
+    if role != "bandung_bondowoso":
+        print(f"Tidak bisa akses dengan role {role}")
+        return candi, bahan_bangunan
+    else:
+        arr_role = getArrayCol(users, 2)
+        count_pembangun = 0
+        count_pembangun = howManyX(arr_role, "jin_pembangun", count_pembangun)
+        arrusernamepembangun = [0 for i in range(count_pembangun)]
+        n = 0
+        for i in range(manual_len(users)):
+            if users[i][2] == "jin_pembangun":
+                arrusernamepembangun[n] = users[i][0]
+                n += 1
+
+        if count_pembangun == 0:
+            print("Bangun gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.")
+            return candi, bahan_bangunan
+        else:
+            SumPasirButuh = 0
+            SumBatuButuh = 0
+            SumAirButuh = 0
+            newCandi = [0 for i in range(count_pembangun+1)]
+            newCandi[count_pembangun] = ";EOP"
+
+            for i in range(count_pembangun):
+                PasirButuh = random.randint(1, 5)
+                BatuButuh = random.randint(1, 5)
+                AirButuh = random.randint(1, 5)
+
+                SumPasirButuh += PasirButuh
+                SumBatuButuh += BatuButuh
+                SumAirButuh += AirButuh
+
+                newCandi[i] = [(manual_len(candi)+i), arrusernamepembangun[i], PasirButuh, BatuButuh, AirButuh]
+
+            print(f"Mengerahkan {count_pembangun} jin untuk membangun candi dengan total {SumPasirButuh} pasir, {SumBatuButuh} batu, dan {SumAirButuh} air.")
+            count_newcandi = manual_len(newCandi)
+            if (manual_len(candi) + count_newcandi)  > 100:
+                print("Bangun gagal, jumlah candi melebihi 100")
+                return candi, bahan_bangunan
+            else:
+                if pasir < SumPasirButuh:
+                    if batu < SumBatuButuh:
+                        if air < SumAirButuh:
+                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir, {SumBatuButuh-batu} batu, dan {SumAirButuh-air} air.")
+                            return candi, bahan_bangunan
+                        else:
+                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir dan {SumBatuButuh-batu} batu.")
+                            return candi, bahan_bangunan
+                    else:
+                        if air < SumAirButuh:
+                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir dan {SumAirButuh-air} air.")
+                            return candi, bahan_bangunan
+                        else:
+                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir.")
+                            return candi, bahan_bangunan
+                elif batu < SumBatuButuh:
+                    if air < SumAirButuh:
+                        print(f"Bangun gagal. Kurang {SumBatuButuh-batu} batu, dan {SumAirButuh-air} air.")
+                        return candi, bahan_bangunan
+                    else:
+                        print(f"Bangun gagal. Kurang {SumBatuButuh-batu} batu.")
+                        return candi, bahan_bangunan
+                elif air < SumAirButuh:
+                    print(f"Bangun gagal. Kurang {SumAirButuh-air} air.")
+                    return candi, bahan_bangunan
+                else:
+                    print(f"Jin berhasil membangun total {count_newcandi} candi.")
+                    for i in range(count_newcandi):
+                        candi = manual_append(candi, newCandi[i])
+                    bahan_bangunan[1][2] = pasir - SumPasirButuh
+                    bahan_bangunan[2][2] = batu - SumBatuButuh
+                    bahan_bangunan[3][2] = air - SumAirButuh
+                    return candi, bahan_bangunan
+
 
 # F09 - Laporan Jin - Filbert F
 def laporanJin(users,bahan,candi, role):
