@@ -84,19 +84,25 @@ def summonjin(users,role):
 def hapusjin(users, candi, role):
     if role == 'bandung_bondowoso':
         UnameJin = input("Masukkan username jin : ")
-        for i in range(manual_len(users)):
-            if UnameJin == users[i][0]:
-                indexJin = i
-                Pilihan=input(f'Apakah anda yakin ingin menghapus jin dengan username {UnameJin} (Y/N)? ')
-                if Pilihan == 'N':
-                    break
-                elif Pilihan == 'Y': 
-                    for k in range(manual_len(candi)):   #Modifikasi file candi.csv
-                        temp_candi = [["id","pembuat","pasir","batu","air",''],"EOP"]
-                        if candi[k][1] != UnameJin:
-                            manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
-                    candi = temp_candi
-                    return index_pop(users,i),candi
+        if UnameJin != 'bandung_bondowoso' and UnameJin != 'roro_jonggrang':
+            for i in range(manual_len(users)):
+                if UnameJin == users[i][0]:
+                    indexJin = i
+                    Pilihan=input(f'Apakah anda yakin ingin menghapus jin dengan username {UnameJin} (Y/N)? ')
+                    if Pilihan == 'N':
+                        break
+                    elif Pilihan == 'Y': 
+                        for j in range(i, manual_len(users)):
+                            users[j][0],users[j][1],users[j][2] = users[j+1][0],users[j+1][1],users[j+1][2]
+                        for k in range(manual_len(candi)):   #Modifikasi file candi.csv
+                            temp_candi = [["id","pembuat","pasir","batu","air",''],"EOP"]
+                            if candi[k][1] != UnameJin:
+                                manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
+                        candi = temp_candi
+                        print(index_pop(users,i))
+                        return index_pop(users,i),candi
+        else:
+            print('Fungsi ini hanya ditujukan kepada jin')
     else:
         print('Role anda bukanlah bandung_bondowoso')
        
