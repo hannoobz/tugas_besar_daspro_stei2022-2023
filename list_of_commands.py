@@ -83,11 +83,12 @@ def summonjin(users,role):
 #F04 - Hapus Jin - M Raihan A
 def hapusjin(users, candi, role):
     if role == 'bandung_bondowoso':
-        UnameJin = input("Masukkan username jin : ")
+        UnameJin = input("Masukkan username jin : ");ada=False
         if UnameJin != 'Bondowoso' and UnameJin != 'Roro':
            for i in range(manual_len(users)):
             if UnameJin == users[i][0]:
-                indexJin = i
+                ada=True;indexJin = i
+            if ada = True:
                 Pilihan=input(f'Apakah anda yakin ingin menghapus jin dengan username {UnameJin} (Y/N)? ')
                 if Pilihan == 'N':
                     break
@@ -97,10 +98,10 @@ def hapusjin(users, candi, role):
                         if candi[k][1] != UnameJin:
                             manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
                     candi = temp_candi
-                    return index_pop(users,i),candi
-        else:
-            print('Fungsi ini hanya ditujukan kepada jin')
-            return users,candi
+                    return index_pop(users,indexJin),candi
+            else:
+                print('Tidak ada jin dengan username tersebut')
+                return users,candi
     else:
         print('Role anda bukanlah bandung_bondowoso')
         return users,candi
@@ -135,7 +136,7 @@ def ubahjin(users,role):
         
         
 #F06 - Bangun Candi - M Raihan A
-def bangun(users, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
+def bangun(username, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
     PasirButuh = random.randint(1, 5)
     BatuButuh = random.randint(1, 5)
     AirButuh = random.randint(1, 5)
