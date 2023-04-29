@@ -55,6 +55,28 @@ def manual_append(array,element):
     new_array[length+1] = ";EOP"
     return new_array
 
+def manual_pop(array,element):
+    length = manual_len(array)
+    new_array = ["" for i in range(length)]
+    elmt_found = False
+    for i in range(length):
+        if array[i]==element:
+            elmt_found = True
+        if elmt_found==False:
+            new_array[i]=array[i]
+        else:
+            new_array[i]=array[i+1]
+    return new_array
+
+def index_pop(array,index):
+    length = manual_len(array)
+    new_array = ["" for i in range(length)]
+    for i in range(index):
+        new_array[i]=array[i]
+    for i in range(index,length):
+        new_array[i]=array[i+1]
+    return new_array
+
 # Mengambil sebuah matriks dan hanya mengeluarkan row yang berisi data
 # (Menghapus row judul)
 def removeFirstRow(arr):
@@ -143,7 +165,7 @@ def arrtocsv(arr,filename,col):
     csv_file = open(filename,"w")
     for i in range(manual_len(arr)):
         for j in range(col):
-            csv_file.write(arr[i][j])
+            csv_file.write(str(arr[i][j]))
             csv_file.write(";")
         csv_file.write("\n")
     csv_file.close()
