@@ -37,7 +37,7 @@ def logout(role):
 
 #F03 - Summon Jin - Raihan A
 def summonjin(users,role):
-    if manual_len(users) > 103:
+    if manual_len(users) > 102:
         print('Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu')
         return users
     if role != "bandung_bondowoso":
