@@ -98,7 +98,7 @@ def hapusjin(users, candi, role):
                         if candi[k][1] != UnameJin:
                             manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
                     candi = temp_candi
-                    return index_pop(users,indexJin),candi
+                    return removeElmt(users,indexJin),candi
             else:
                 pass
         else:
@@ -148,10 +148,15 @@ def bangun(username, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
     air =  int(bahan_bangunan[3][2])
+    id_candi = 0
+
+    for i in range(1,manual_len(candi)):
+        if id_candi<=int(candi[i][0]):
+            id_candi = int(candi[i][0])+1
 
     if role == 'jin_pembangun':
         if pasir >= PasirButuh and batu >= BatuButuh and air >= AirButuh: #Memeriksa bahan bangunan dan menentukan pembangunan candi
-            new_candi = [manual_len(candi)-1, username, PasirButuh, BatuButuh, AirButuh]
+            new_candi = [id_candi, username, PasirButuh, BatuButuh, AirButuh]
             candi = manual_append(candi, new_candi)
             bahan_bangunan[1][2] = pasir - PasirButuh
             bahan_bangunan[2][2] = batu - BatuButuh
@@ -188,85 +193,6 @@ def kumpul(role, bahan_bangunan):
         return pasir,batu,air
     
 # FO8 - Batch kumpul/bangun - Filbert F
-def batchbangun(users, bahan_bangunan, candi, role):
-    pasir =  int(bahan_bangunan[1][2])
-    batu =  int(bahan_bangunan[2][2])
-    air =  int(bahan_bangunan[3][2])
-    if role != "bandung_bondowoso":
-        print(f"Tidak bisa akses dengan role {role}")
-        return candi, bahan_bangunan
-    else:
-        arr_role = getArrayCol(users, 2)
-        count_pembangun = 0
-        count_pembangun = howManyX(arr_role, "jin_pembangun", count_pembangun)
-        arrusernamepembangun = [0 for i in range(count_pembangun)]
-        n = 0
-        for i in range(manual_len(users)):
-            if users[i][2] == "jin_pembangun":
-                arrusernamepembangun[n] = users[i][0]
-                n += 1
-
-        if count_pembangun == 0:
-            print("Bangun gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.")
-            return candi, bahan_bangunan
-        else:
-            SumPasirButuh = 0
-            SumBatuButuh = 0
-            SumAirButuh = 0
-            newCandi = [0 for i in range(count_pembangun+1)]
-            newCandi[count_pembangun] = ";EOP"
-
-            for i in range(count_pembangun):
-                PasirButuh = random.randint(1, 5)
-                BatuButuh = random.randint(1, 5)
-                AirButuh = random.randint(1, 5)
-
-                SumPasirButuh += PasirButuh
-                SumBatuButuh += BatuButuh
-                SumAirButuh += AirButuh
-
-                newCandi[i] = [(manual_len(candi)+i), arrusernamepembangun[i], PasirButuh, BatuButuh, AirButuh]
-                
-            print(f"Mengerahkan {count_pembangun} jin untuk membangun candi dengan total {SumPasirButuh} pasir, {SumBatuButuh} batu, dan {SumAirButuh} air.")
-            count_newcandi = manual_len(newCandi)
-            if (manual_len(candi) + count_newcandi)  > 100:
-                print("Bangun gagal, jumlah candi melebihi 100")
-                return candi, bahan_bangunan
-            else:
-                if pasir < SumPasirButuh:
-                    if batu < SumBatuButuh:
-                        if air < SumAirButuh:
-                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir, {SumBatuButuh-batu} batu, dan {SumAirButuh-air} air.")
-                            return candi, bahan_bangunan
-                        else:
-                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir dan {SumBatuButuh-batu} batu.")
-                            return candi, bahan_bangunan
-                    else:
-                        if air < SumAirButuh:
-                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir dan {SumAirButuh-air} air.")
-                            return candi, bahan_bangunan
-                        else:
-                            print(f"Bangun gagal. Kurang {SumPasirButuh-pasir} pasir.")
-                            return candi, bahan_bangunan
-                elif batu < SumBatuButuh:
-                    if air < SumAirButuh:
-                        print(f"Bangun gagal. Kurang {SumBatuButuh-batu} batu, dan {SumAirButuh-air} air.")
-                        return candi, bahan_bangunan
-                    else:
-                        print(f"Bangun gagal. Kurang {SumBatuButuh-batu} batu.")
-                        return candi, bahan_bangunan
-                elif air < SumAirButuh:
-                    print(f"Bangun gagal. Kurang {SumAirButuh-air} air.")
-                    return candi, bahan_bangunan
-                else:
-                    print(f"Jin berhasil membangun total {count_newcandi} candi.")
-                    for i in range(count_newcandi):
-                        candi = manual_append(candi, newCandi[i])
-                    bahan_bangunan[1][2] = pasir - SumPasirButuh
-                    bahan_bangunan[2][2] = batu - SumBatuButuh
-                    bahan_bangunan[3][2] = air - SumAirButuh
-                    return candi, bahan_bangunan
-                
 def batchkumpul(role, users, bahan_bangunan):
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
