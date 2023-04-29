@@ -68,15 +68,6 @@ def manual_pop(array,element):
             new_array[i]=array[i+1]
     return new_array
 
-def index_pop(array,index):
-    length = manual_len(array)
-    new_array = ["" for i in range(length)]
-    for i in range(index):
-        new_array[i]=array[i]
-    for i in range(index,length):
-        new_array[i]=array[i+1]
-    return new_array
-
 # Mengambil sebuah matriks dan hanya mengeluarkan row yang berisi data
 # (Menghapus row judul)
 def removeFirstRow(arr):
@@ -151,13 +142,13 @@ def findIdx(arr,x):
             return i
     return False
 
-def removeElmt(arr,id):
-    new_arr = [0 for i in range(manual_len(arr) - 1)]
-    c = 0
-    for i in range(manual_len(arr)):
-        if i != id:
-            new_arr[c] = arr[i]
-            c += 1
+def removeElmt(array,index):
+    length = manual_len(array)
+    new_arr = ["" for i in range(length)]
+    for i in range(index):
+        new_arr[i]=array[i]
+    for i in range(index,length):
+        new_arr[i]=array[i+1]
     return new_arr
 
 # arrtocsv, memasukkan array ke file csv
