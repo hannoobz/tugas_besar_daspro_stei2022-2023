@@ -87,27 +87,31 @@ def hapusjin(users, candi, role):
         if UnameJin != 'Bondowoso' and UnameJin != 'Roro':
            for i in range(manual_len(users)):
             if UnameJin == users[i][0]:
-                ada=True;indexJin = i
+                ada = True; indexJin = i
             if ada == True:
                 Pilihan=input(f'Apakah anda yakin ingin menghapus jin dengan username {UnameJin} (Y/N)? ')
                 if Pilihan == 'N':
-                    break
+                    return users,candi 
                 elif Pilihan == 'Y': 
                     for k in range(manual_len(candi)):   #Modifikasi file candi.csv
                         temp_candi = [["id","pembuat","pasir","batu","air",''],"EOP"]
                         if candi[k][1] != UnameJin:
                             manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
                     candi = temp_candi
+                    print(index_pop(users,indexJin))
                     return index_pop(users,indexJin),candi
             else:
-                print('Tidak ada jin dengan username tersebut')
-                return users,candi
+                pass
         else:
             print('Tidak dapat menghapus user dengan role selain jin_pembangun atau jin_pengumpul')
             return users,candi 
+        if ada==False:
+            print('Tidak ada jin dengan username tersebut')
+            return users,candi
     else:
         print('Role anda bukanlah bandung_bondowoso')
         return users,candi
+       
        
     
 #F05 - Ubah tipe Jin - M Raihan A
