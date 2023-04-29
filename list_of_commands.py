@@ -88,7 +88,7 @@ def hapusjin(users, candi, role):
            for i in range(manual_len(users)):
             if UnameJin == users[i][0]:
                 ada=True;indexJin = i
-            if ada = True:
+            if ada == True:
                 Pilihan=input(f'Apakah anda yakin ingin menghapus jin dengan username {UnameJin} (Y/N)? ')
                 if Pilihan == 'N':
                     break
@@ -102,6 +102,9 @@ def hapusjin(users, candi, role):
             else:
                 print('Tidak ada jin dengan username tersebut')
                 return users,candi
+        else:
+            print('Tidak dapat menghapus user dengan role selain jin_pembangun atau jin_pengumpul')
+            return users,candi 
     else:
         print('Role anda bukanlah bandung_bondowoso')
         return users,candi
@@ -225,7 +228,6 @@ def laporanJin(users,bahan,candi, role):
 
         # matriks yang berisi hanya data (judul tidak diproses)
         data_user = removeFirstRow(users)
-        data_bahan = removeFirstRow(bahan)
         data_candi = removeFirstRow(candi)
 
         count_pengumpul = 0
@@ -293,22 +295,6 @@ def laporanJin(users,bahan,candi, role):
             jin_malas = arr_pembangun[id_malas]
             jin_rajin = arr_pembangun[id_rajin]
 
-        # Mencari Jumlah Pasir, Batu, dan Air yang digunakan
-        sum_pasir = 0
-        sum_batu = 0
-        sum_air = 0
-
-        if not(data_bahan): # Jika data_bahan kosong
-            pass
-        else:
-            for i in range(manual_len(data_bahan)):
-                if data_bahan[i][0] == "Pasir":
-                    sum_pasir += int(data_bahan[i][2])
-                if data_bahan[i][0] == "Batu":
-                    sum_batu += int(data_bahan[i][2])
-                if data_bahan[i][0] == "Air":
-                    sum_air += int(data_bahan[i][2])
-
         # Mengeprint Hasil
         print("="*11 + "\nLaporan Jin" + "\n" + "="*11)
         print(f"Total Jin: {count_jin}")
@@ -316,9 +302,9 @@ def laporanJin(users,bahan,candi, role):
         print(f"Total Jin Pembangun: {count_pembangun}")
         print(f"Jin Terajin: {jin_rajin}")
         print(f"Jin Termalas: {jin_malas}")
-        print(f"Jumlah Pasir: {sum_pasir} unit")
-        print(f"Jumlah Batu: {sum_batu} unit")
-        print(f"Jumlah Air: {sum_air} unit")
+        print(f"Jumlah Pasir: {bahan[1][2]} unit")
+        print(f"Jumlah Batu: {bahan[2][2]} unit")
+        print(f"Jumlah Air: {bahan[3][2]} unit")
  
 
 # F10 - Laporan Candi - Filbert F
