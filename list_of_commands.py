@@ -427,26 +427,24 @@ def laporanCandi(candi, role):
             sum_air = sumArray(getArrayCol(data_candi,4))
 
             # Mencari Candi Termahal dan Termurah
+            arridcandi =  getArrayCol(data_candi,0)
+            
             arr_bahan = [0 for i in range(manual_len(data_candi) + 1)]
             for i in range(manual_len(data_candi)):
                 arr_bahan[i] = getArrayRow(data_candi, i, 2, 5)
             arr_bahan[manual_len(data_candi)] = ";EOP"
 
-            arr_sumBahan = [0 for i in range(manual_len(arr_bahan) + 1)]
+            arrprice = [0 for i in range(manual_len(arr_bahan) + 1)]
             for i in range(manual_len(arr_bahan)):
-                arr_sumBahan[i] = sumArray(arr_bahan[i])
-            arr_sumBahan[manual_len(arr_bahan)] = ";EOP"
+                arrprice[i] = (int(arr_bahan[i][0]) * 10000) + (int(arr_bahan[i][1]) * 15000) + (int(arr_bahan[i][2]) *7500)
+            arrprice[manual_len(arr_bahan)] = ";EOP"
             
-            max = arr_sumBahan[0]
-            id = 0
-            idmax = maxArrayID(arr_sumBahan, max, id)
+            idmax = find_max_id(arrprice, 0, 1)
             
-            min = arr_sumBahan[0]
-            id = 0
-            idmin = minArrayID(arr_sumBahan, min, id)
+            idmin = find_min_id(arrprice, 0, 1)
 
-            price_max = (int(arr_bahan[idmax][0]) * 10000) + (int(arr_bahan[idmax][1]) * 15000) + (int(arr_bahan[idmax][2]) *7500)
-            price_min = (int(arr_bahan[idmin][0]) * 10000) + (int(arr_bahan[idmin][1]) * 15000) + (int(arr_bahan[idmin][2]) *7500)
+            price_max = arrprice[idmax]
+            price_min = arrprice[idmin]
 
             # Mengeprint Hasil
             print("="*13 + "\nLaporan Candi" + "\n" + "="*13)
@@ -454,8 +452,8 @@ def laporanCandi(candi, role):
             print(f"Total Pasir yang digunakan: {sum_pasir}")
             print(f"Total Batu yang digunakan: {sum_batu}")
             print(f"Total Air yang digunakan: {sum_air}")
-            print(f"ID Candi Termahal: {idmax + 1} (Rp {price_max})")
-            print(f"ID Candi Termurah: {idmin + 1} (Rp {price_min})")
+            print(f"ID Candi Termahal: {arridcandi[idmax]} (Rp {price_max})")
+            print(f"ID Candi Termurah: {arridcandi[idmin]} (Rp {price_min})")
     
 # F11 - Hancurkan Candi - Filbert F
 def hancurkanCandi(candi, role):
