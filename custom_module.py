@@ -105,24 +105,22 @@ def sumArray(arr):
             return int(arr[0]) + sumArray(removeFirstRow(arr))
 
 # Mengeluarkan ID integer maksimum dalam sebuah array integer (RECURSIVE)
-def maxArrayID(arr, max, id):
-    if manual_len(arr) == 0:
-        return id
+def find_max_id(arr, max_id, idx):
+    if idx == manual_len(arr):
+        return max_id
     else:
-        if arr[0] > max:
-            max = arr[0]
-            id = manual_len(arr) - 1
-        return maxArrayID(removeFirstRow(arr) , max, id)
+        if arr[idx] > arr[max_id]:
+            max_id = idx
+        return find_max_id(arr, max_id, idx + 1)
 
 # Mengeluarkan ID integer minimum dalam sebuah array integer (RECURSIVE)
-def minArrayID(arr, min, id):
-    if manual_len(arr) == 0:
-        return id
+def find_min_id(arr, min_id, idx):
+    if idx == manual_len(arr):
+        return min_id
     else:
-        if arr[0] < min:
-            min = arr[0]
-            id = manual_len(arr) - 1
-        return minArrayID(removeFirstRow(arr) , min, id)
+        if arr[idx] < arr[min_id]:
+            min_id = idx
+        return find_min_id(arr, min_id, idx + 1)
 
 # Mengeluarkan huruf pertama dari sebuah character
 def firstLetter(char):
