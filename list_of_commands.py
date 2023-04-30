@@ -33,7 +33,7 @@ def logout(role):
     else:
         print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
-
+        return "",""
 
 #F03 - Summon Jin - Raihan A
 def summonjin(users,role):
