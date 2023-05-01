@@ -1,3 +1,5 @@
+# custom_module.py
+
 # Fungsi manual_split 
 # untuk splitting string
 # Cara pakai :
