@@ -315,7 +315,7 @@ def batchbangun(users, bahan_bangunan, candi, role):
 def laporanJin(users,bahan,candi, role):
     
     if role != "bandung_bondowoso":
-        print ("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.")
+        print ("Tidak bisa akses")
     
     else:
         # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
@@ -333,51 +333,70 @@ def laporanJin(users,bahan,candi, role):
             if data_user[i][2] == "jin_pembangun":
                 count_pembangun += 1
 
-        count_candi = manual_len(data_candi)
-        username = [";EOP"]
-        count = [";EOP"]
-        for i in range(count_candi):
-            if (howManyX(username, data_candi[i][1], 0) == 0):
-                username = manual_append(username, data_candi[i][1])
-                count = manual_append(count, 1)
-                print("s")
-            else:
-                count[findIdx(username, data_candi[i][1])] += 1
+        # Mencari Jin Termalas dan Terajin
+        # Array ini berisi nama jin yang memiliki role "pembangun"
+        arr_pembangun = [0 for i in range(count_pembangun + 1)]
+        n = 0
+        for i in range(manual_len(data_user)):
+            if data_user[i][2] == 'jin_pembangun':
+                arr_pembangun[n] = data_user[i][0]
+                n += 1
+        arr_pembangun[n] = ";EOP"
+
+        # Array ini berisi kolom pada matriks data_candi yang mendata pembuat candi
+        arr_candi_pembangun = getArrayCol(data_candi,1)
+
+        # Array ini berhubungan dengan arr_pembangun dan menuliskan banyaknya elemen pada
+        # arr_pembangun keluar pada arr_candi_pembangun
+        arr_banyakcandi = [0 for i in range(manual_len(arr_pembangun) + 1)]
         
-        if count_pembangun <= 1 or count_candi == 0:
+        for i in range(manual_len(arr_pembangun)):
+            
+            count = 0
+            count_banyakcandi = howManyX(arr_candi_pembangun, arr_pembangun[i], count)
+            arr_banyakcandi[i] = count_banyakcandi
+            
+        arr_banyakcandi[manual_len(arr_pembangun)] = ";EOP"
+
+        # Jika jumlah jin pembangun = 0
+        if count_pembangun == 0:
             jin_malas = "-"
             jin_rajin = "-"
 
+        # Jika jumlah jin pembangun > 0
         else:
-            max = count[0]
-            min = count[0]
+            max = arr_banyakcandi[0]
+            min = arr_banyakcandi[0]
             id_malas = 0
             id_rajin = 0
 
-            for i in range(manual_len(count)):
-                if count[i] > max: # Kondisi 1
+            for i in range(manual_len(arr_banyakcandi)):
+                if arr_banyakcandi[i] > max: # Kondisi 1
                     id_rajin = i
-                    max = count[i]
-                elif count[i] == max: # Kondisi 2
-                    if firstLetter(username[i]) < firstLetter(username[id_rajin]):
+                    max = arr_banyakcandi[i]
+                elif arr_banyakcandi[i] == max: # Kondisi 2
+                    if firstLetter(arr_pembangun[i]) < firstLetter(arr_pembangun[id_rajin]):
                         id_rajin = i
-                        max = count[i]
+                        max = arr_banyakcandi[i]
 
-                if count[i] < min: # Kondisi 1
+                if arr_banyakcandi[i] < min: # Kondisi 1
                     id_malas = i
-                    min = count[i]
-                elif count[i] == min: # Kondisi 2
-                    if firstLetter(username[i]) > firstLetter(username[id_malas]):
+                    min = arr_banyakcandi[i]
+                elif arr_banyakcandi[i] == min: # Kondisi 2
+                    if firstLetter(arr_pembangun[i]) > firstLetter(arr_pembangun[id_malas]):
                         id_malas = i
-                        min = count[i]
+                        min = arr_banyakcandi[i]
+
+            jin_malas = arr_pembangun[id_malas]
+            jin_rajin = arr_pembangun[id_rajin]
 
         # Mengeprint Hasil
         print("="*11 + "\nLaporan Jin" + "\n" + "="*11)
         print(f"Total Jin: {count_jin}")
         print(f"Total Jin Pengumpul: {count_pengumpul}")
         print(f"Total Jin Pembangun: {count_pembangun}")
-        print(f"Jin Terajin: {username[id_rajin]}")
-        print(f"Jin Termalas: {username[id_malas]}")
+        print(f"Jin Terajin: {jin_rajin}")
+        print(f"Jin Termalas: {jin_malas}")
         print(f"Jumlah Pasir: {bahan[1][2]} unit")
         print(f"Jumlah Batu: {bahan[2][2]} unit")
         print(f"Jumlah Air: {bahan[3][2]} unit")
