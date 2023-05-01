@@ -406,7 +406,7 @@ def laporanJin(users,bahan,candi, role):
 def laporanCandi(candi, role):
     
     if role != "bandung_bondowoso":
-        print("Tidak bisa akses")
+        print("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.")
         
     else:
         # Membaca data
