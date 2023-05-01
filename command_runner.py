@@ -1,20 +1,31 @@
+# command_runner.py
+# Import modul dari command yang bisa digunakan di CLI
 from list_of_commands import *
-role = ""
+
+# Inisialisasi variable role dan username
+role = ""     # "" artinya belum terlogin
 username = ""
 
 # F13 - Load - HaniefFN
 def loadgame(folder_dir):
+    # Variable global
     global users
     global candi
     global bahan_bangunan
+    
+    # mengecek argument yang diberikan dari main
+    # Tidak ada argument
     if folder_dir == None:
         print("\nTidak ada nama folder yang diberikan!\n")
         print("Usage: python main.py <nama_folder>")
         exit()
+    # Folder tidak ada
     elif not os.path.exists("save/"+str(folder_dir)):
         print(f'\nFolder "{folder_dir}" tidak ditemukan.')
         exit()
+    # Folder ada
     else:
+        # Memuat file data eksternal ke variable
         users = loader("save/"+str(folder_dir)+"/user.csv")
         candi = loader("save/"+str(folder_dir)+"/candi.csv")
         bahan_bangunan = loader("save/"+str(folder_dir)+"/bahan_bangunan.csv")
@@ -27,14 +38,19 @@ def loadgame(folder_dir):
         print("Loading...")
         print("Selamat datang di program “Manajerial Candi”")
         print("Silahkan masukkan username Anda")
+        
+        # Menjalankan prosedur login
         runner("login")
 
 def runner(string_command):
+    # Variable global
     global users
     global candi
     global bahan_bangunan
     global role
     global username
+    
+    # Pengecekan input untuk fungsi/prosedur yang sesuai
     if string_command == "login":
         role,username = login(users,role,username)
     if string_command =="logout":
