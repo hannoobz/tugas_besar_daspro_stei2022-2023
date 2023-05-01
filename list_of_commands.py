@@ -124,6 +124,7 @@ def ubahjin(users,role):
                     if ganti == 'Y':
                         users[i][2] = 'jin_pembangun'
                         print('Jin telah berhasil diubah')
+                        return users
                     elif ganti == 'N':
                         break
                 elif users [i][2] =='jin_pembangun':
@@ -131,11 +132,12 @@ def ubahjin(users,role):
                     if ganti == 'Y':
                         users[i][2] = 'jin_pengumpul'
                         print('Jin telah berhasil diubah')
+                        return users
                     elif ganti == 'N':
                         break
         if ada==0:
             print('Tidak ada jin dengan username tersebut')
-            return
+            return users
     else:
         print('user anda bukanlah bandung bondowoso')
         
