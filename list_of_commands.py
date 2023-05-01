@@ -208,7 +208,7 @@ def batchkumpul(role, users, bahan_bangunan):
         count_pengumpul = howManyX(arr_role, "jin_pengumpul", count_pengumpul)
 
         if count_pengumpul == 0 :
-            # Output pesan Tidak ada jin pengumpul
+            print("Anda tidak punya jin pengumpul. Silahkan summon terlebih dahulu.")
             return pasir,batu,air
         else:
             sumpasirKumpul = 0
