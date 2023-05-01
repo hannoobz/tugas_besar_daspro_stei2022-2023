@@ -47,12 +47,12 @@ def summonjin(users,role):
         print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
         print(" (2) Pembangun - Bertugas membangun candi")
         while True:
-            TipeJin = int(input('Masukkan nomor jenis jin yang ingin dipanggil: '))
-            if  TipeJin ==1:
+            TipeJin = (input('Masukkan nomor jenis jin yang ingin dipanggil: '))
+            if  TipeJin =="1":
                 print("Memilih jin “Pengumpul”")
                 Tipe = "jin_pengumpul"
                 break
-            elif TipeJin == 2:
+            elif TipeJin == "2":
                 print("Memilih jin Pembangun")
                 Tipe = "jin_pembangun"
                 break
