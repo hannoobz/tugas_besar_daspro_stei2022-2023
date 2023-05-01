@@ -115,6 +115,7 @@ def hapusjin(users, candi, role):
     
 #F05 - Ubah tipe Jin - M Raihan A
 def ubahjin(users,role):
+    ada = 0
     if role == 'bandung_bondowoso':
         jinGanti = input('Masukkan username jin : ')
         for i in range(3, manual_len(users)):
