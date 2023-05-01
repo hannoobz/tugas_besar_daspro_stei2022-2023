@@ -1,26 +1,47 @@
+# list_of_commands.py
+
+# Import modul yang diperlukan
+
+# custom_module berisi modul buatan
 from custom_module import *
+
+# random untuk randomize bahan
 import random
+
+# os untuk mengecek directory
 import os
 
 #F01 - Login - HaniefFN
 def login(users,role,username):
+    
+    # Untuk index array, dimulai dari 1 melewati header
     iteration = 1
+    
+    # Jika role "" berarti belum terlogin
     if role != "":
         print("Login gagal!")
         print("Anda telah login dengan username",username+", silahkan lakukan “logout” sebelum melakukan login kembali.")
         return role,username
+    
+    # Input pengguna
     username = str(input("Username: "))
     password = str(input("Password: "))
+    
+    # Mencari username yang ada sampai bertemu mark ";EOP"
     while True:
         if users[iteration][0] == username:
             if users[iteration][1]==password:
                 print("\nSelamat datang,",username+"!")
                 print("Masukkan command “help” untuk daftar command yang dapat kamu panggil.")
                 role = users[iteration][2]
+                
+                # Kondisi terlogin saat role sudah tidak "" 
                 return role,username
             else:
                 print("\nPassword Salah!")
                 return "",""
+            
+        # Mark ";EOP", username yang dicari tidak ada 
         if users[iteration]==';EOP':
             print("\nUsername tidak terdaftar!")
             return "",""
@@ -28,18 +49,26 @@ def login(users,role,username):
 
 #F02 - Logout - HaniefFN
 def logout(role):
+    
+    # Mengecek kondisi login
     if role !="":
         return "",""
     else:
         print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         return "",""
+    # Fungsi tetap me-return nilai "","" karena fungsi ini ter-assign pada variable
+    # di command_runner
 
 #F03 - Summon Jin - Raihan A
 def summonjin(users,role):
+    
+    # Pengecekan jumlah jin
     if manual_len(users) > 102:
         print('Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu')
         return users
+    
+    # Pengecekan role
     if role != "bandung_bondowoso":
         return users
     else:
@@ -47,6 +76,7 @@ def summonjin(users,role):
         print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
         print(" (2) Pembangun - Bertugas membangun candi")
         while True:
+            # Pemilihan tipe jin
             TipeJin = (input('Masukkan nomor jenis jin yang ingin dipanggil: '))
             if  TipeJin =="1":
                 print("Memilih jin “Pengumpul”")
@@ -78,13 +108,18 @@ def summonjin(users,role):
         print("Menyerahkan sesajen...")
         print("Membacakan mantra...")
         print(f"Jin {UnameJin} berhasil dipanggil!")
+        
+        # Return array of users baru dengan penambahan jin baru
         return manual_append(users,[UnameJin,PassJin,Tipe])
 
 #F04 - Hapus Jin - M Raihan A
 def hapusjin(users, candi, role):
+    # Pengecekan role
     if role == 'bandung_bondowoso':
         UnameJin = input("Masukkan username jin : ");ada=False
+        # Roro dan Bondowoso bukan jin yang dapat dihapus
         if UnameJin != 'Bondowoso' and UnameJin != 'Roro':
+            # Mencari posisi index jin yang akan dihapus
            for i in range(manual_len(users)):
             if UnameJin == users[i][0]:
                 ada = True; indexJin = i
@@ -115,12 +150,17 @@ def hapusjin(users, candi, role):
     
 #F05 - Ubah tipe Jin - M Raihan A
 def ubahjin(users,role):
+    # Inisialisasi apakah ada jin yang diinputkan
     ada = 0
+    
+    # Pengecekan role
     if role == 'bandung_bondowoso':
         jinGanti = input('Masukkan username jin : ')
         for i in range(3, manual_len(users)):
+            # username jin ditemukan
             if users[i][0] == jinGanti:
                 ada=1
+                # pengumpul -> pembangun
                 if users[i][2] == 'jin_pengumpul':
                     ganti = input("Jin ini bertipe "'Pengumpul'". Yakin ingin mengubah ke tipe "'Pembangun'" (Y/N)? ")
                     if ganti == 'Y':
@@ -129,6 +169,7 @@ def ubahjin(users,role):
                         return users
                     elif ganti == 'N':
                         break
+                # pembangun -> pengumpul
                 elif users [i][2] =='jin_pembangun':
                     ganti = input("Jin ini bertipe "'Pembangun'". Yakin ingin mengubah ke tipe "'Pengumpul'" (Y/N)? ")
                     if ganti == 'Y':
@@ -145,19 +186,25 @@ def ubahjin(users,role):
         
         
 #F06 - Bangun Candi - M Raihan A
-def bangun(username, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
+def bangun(username, bahan_bangunan, candi, role):
+    
+    # Inisialisasi kebutuhan bahan dengan random
     PasirButuh = random.randint(1, 5)
     BatuButuh = random.randint(1, 5)
     AirButuh = random.randint(1, 5)
+    
+    # Mengambil nilai bahan dari array data bahan
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
     air =  int(bahan_bangunan[3][2])
     id_candi = 0
 
+    # Mencari nilai maksimum sebagai ID candi baru
     for i in range(1,manual_len(candi)):
         if id_candi<=int(candi[i][0]):
             id_candi = int(candi[i][0])+1
 
+    # Pengecekan role
     if role == 'jin_pembangun':
         if pasir >= PasirButuh and batu >= BatuButuh and air >= AirButuh: #Memeriksa bahan bangunan dan menentukan pembangunan candi
             new_candi = [id_candi, username, PasirButuh, BatuButuh, AirButuh]
@@ -182,13 +229,20 @@ def bangun(username, bahan_bangunan, candi, role): #Muhammad Raihan Ariffiato
         
 #F07 - Kumpul bahan bangunan - M Raihan A
 def kumpul(role, bahan_bangunan):
+    
+    # Assign nilai bahan yang dikumpulkan
     pasirKumpul = random.randint(0, 5) 
     batuKumpul = random.randint(0, 5)
     airKumpul = random.randint(0, 5)
+    
+    # Nilai bahan dari array data bahan
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
     air =  int(bahan_bangunan[3][2])
+    
+    # Pengecekan role
     if role == 'jin_pengumpul':
+        # Menjumlahkan hasil
         pasir += pasirKumpul; batu += batuKumpul; air += airKumpul
         print(f'Jin menemukan {pasirKumpul} pasir, {batuKumpul} batu, {airKumpul} air.')
         return pasir,batu,air
@@ -198,13 +252,18 @@ def kumpul(role, bahan_bangunan):
     
 # FO8 - Batch kumpul/bangun - Filbert F
 def batchkumpul(role, users, bahan_bangunan):
+    
+    # Nilai bahan dari array data bahan
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
     air =  int(bahan_bangunan[3][2])
+    
+    # Pengecekan role
     if role != "bandung_bondowoso":
         print(f"Tidak bisa akses dengan role {role}")
         return pasir,batu,air
     else:
+        # Mengecek jumlah jin pengumpul
         arr_role = getArrayCol(users, 2)
         count_pengumpul = 0
         count_pengumpul = howManyX(arr_role, "jin_pengumpul", count_pengumpul)
@@ -216,6 +275,7 @@ def batchkumpul(role, users, bahan_bangunan):
             sumpasirKumpul = 0
             sumbatuKumpul = 0
             sumairKumpul = 0
+            # Iterasi sebanyak jumlah jin pengumpul
             for i in range(count_pengumpul):
                 sumpasirKumpul += random.randint(0, 5) 
                 sumbatuKumpul += random.randint(0, 5)
@@ -227,13 +287,17 @@ def batchkumpul(role, users, bahan_bangunan):
             return pasir,batu,air
 
 def batchbangun(users, bahan_bangunan, candi, role):
+    # Nilai pada array data bahan bangunan
     pasir =  int(bahan_bangunan[1][2])
     batu =  int(bahan_bangunan[2][2])
     air =  int(bahan_bangunan[3][2])
+    
+    # Pengecekan role
     if role != "bandung_bondowoso":
         print(f"Tidak bisa akses dengan role {role}")
         return candi, bahan_bangunan
     else:
+        # Mengecek jumlah jin pembangun
         arr_role = getArrayCol(users, 2)
         count_pembangun = 0
         count_pembangun = howManyX(arr_role, "jin_pembangun", count_pembangun)
@@ -488,9 +552,13 @@ def ayamBerkokok(candi, role):
             
 # F14 - Save - HaniefFN
 def save(users,candi,bahan_bangunan):
+    
+    # Input nama folder
     folder_name = str(input("Masukkan nama folder: "))
     print("\n")
     print("Saving...\n")
+    
+    # Pengecekan apakah folder sudah ada
     if not os.path.exists("save/"+str(folder_name)):
         print("Membuat folder",folder_name,"\n")
     print("Berhasil menyimpan data di folder",folder_name)
@@ -502,6 +570,7 @@ def save(users,candi,bahan_bangunan):
 # F15 - Help - HaniefFN
 def helpgame(role):
     print("=========== HELP ===========")
+    # Pengecekan role untuk output help yang sesuai
     if role=="":
         print("1. login")
         print("   Untuk masuk menggunakan akun")
