@@ -68,15 +68,6 @@ def manual_pop(array,element):
             new_array[i]=array[i+1]
     return new_array
 
-def index_pop(array,index):
-    length = manual_len(array)
-    new_array = ["" for i in range(length)]
-    for i in range(index):
-        new_array[i]=array[i]
-    for i in range(index,length):
-        new_array[i]=array[i+1]
-    return new_array
-
 # Mengambil sebuah matriks dan hanya mengeluarkan row yang berisi data
 # (Menghapus row judul)
 def removeFirstRow(arr):
@@ -110,28 +101,25 @@ def sumArray(arr):
     if manual_len(arr) == 0:
         return 0
     else:
-        for i in range(manual_len(arr)):
-            return int(arr[0]) + sumArray(removeFirstRow(arr))
+        return int(arr[0]) + sumArray(removeFirstRow(arr))
 
 # Mengeluarkan ID integer maksimum dalam sebuah array integer (RECURSIVE)
-def maxArrayID(arr, max, id):
-    if manual_len(arr) == 0:
-        return id
+def find_max_id(arr, max_id, idx):
+    if idx == manual_len(arr):
+        return max_id
     else:
-        if arr[0] > max:
-            max = arr[0]
-            id = manual_len(arr) - 1
-        return maxArrayID(removeFirstRow(arr) , max, id)
+        if arr[idx] > arr[max_id]:
+            max_id = idx
+        return find_max_id(arr, max_id, idx + 1)
 
 # Mengeluarkan ID integer minimum dalam sebuah array integer (RECURSIVE)
-def minArrayID(arr, min, id):
-    if manual_len(arr) == 0:
-        return id
+def find_min_id(arr, min_id, idx):
+    if idx == manual_len(arr):
+        return min_id
     else:
-        if arr[0] < min:
-            min = arr[0]
-            id = manual_len(arr) - 1
-        return minArrayID(removeFirstRow(arr) , min, id)
+        if arr[idx] < arr[min_id]:
+            min_id = idx
+        return find_min_id(arr, min_id, idx + 1)
 
 # Mengeluarkan huruf pertama dari sebuah character
 def firstLetter(char):
@@ -152,12 +140,13 @@ def findIdx(arr,x):
     return False
 
 def removeElmt(arr,id):
-    new_arr = [0 for i in range(manual_len(arr) - 1)]
+    new_arr = [0 for i in range(manual_len(arr))]
     c = 0
     for i in range(manual_len(arr)):
         if i != id:
             new_arr[c] = arr[i]
             c += 1
+    new_arr[c] = ";EOP"
     return new_arr
 
 # arrtocsv, memasukkan array ke file csv
