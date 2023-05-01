@@ -101,8 +101,7 @@ def sumArray(arr):
     if manual_len(arr) == 0:
         return 0
     else:
-        for i in range(manual_len(arr)):
-            return int(arr[0]) + sumArray(removeFirstRow(arr))
+        return int(arr[0]) + sumArray(removeFirstRow(arr))
 
 # Mengeluarkan ID integer maksimum dalam sebuah array integer (RECURSIVE)
 def find_max_id(arr, max_id, idx):
