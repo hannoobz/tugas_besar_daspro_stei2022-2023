@@ -315,7 +315,7 @@ def batchbangun(users, bahan_bangunan, candi, role):
 def laporanJin(users,bahan,candi, role):
     
     if role != "bandung_bondowoso":
-        print ("Tidak bisa akses")
+        print ("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.")
     
     else:
         # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
