@@ -98,6 +98,7 @@ def hapusjin(users, candi, role):
                         if candi[k][1] != UnameJin:
                             manual_append(temp_candi, [candi[k][0], candi[k][1], candi[k][2], candi[k][3], candi[k][4]])
                     candi = temp_candi
+                    print("Jin telah berhasil dihapus dari alam gaib.")
                     return removeElmt(users,indexJin),candi
             else:
                 pass
