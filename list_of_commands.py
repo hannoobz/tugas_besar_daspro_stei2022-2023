@@ -315,7 +315,7 @@ def batchbangun(users, bahan_bangunan, candi, role):
 def laporanJin(users,bahan,candi, role):
     
     if role != "bandung_bondowoso":
-        print ("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.")
+        print ("Tidak bisa akses")
     
     else:
         # Mencari Total Jin, Jin Pengumpul, dan Jin Pembangun
@@ -327,69 +327,51 @@ def laporanJin(users,bahan,candi, role):
 
         count_pengumpul = 0
         count_pembangun = 0
-        for i in range(manual_len(data_user)):
-            if data_user[i][2] == "jin_pengumpul":
+        for iteration in range(manual_len(data_user)):
+            if data_user[iteration][2] == "jin_pengumpul":
                 count_pengumpul += 1
-            if data_user[i][2] == "jin_pembangun":
+            if data_user[iteration][2] == "jin_pembangun":
                 count_pembangun += 1
 
-        # Mencari Jin Termalas dan Terajin
-        # Array ini berisi nama jin yang memiliki role "pembangun"
-        arr_pembangun = [0 for i in range(count_pembangun + 1)]
-        n = 0
-        for i in range(manual_len(data_user)):
-            if data_user[i][2] == 'jin_pembangun':
-                arr_pembangun[n] = data_user[i][0]
-                n += 1
-        arr_pembangun[n] = ";EOP"
-
-        # Array ini berisi kolom pada matriks data_candi yang mendata pembuat candi
-        arr_candi_pembangun = getArrayCol(data_candi,1)
-
-        # Array ini berhubungan dengan arr_pembangun dan menuliskan banyaknya elemen pada
-        # arr_pembangun keluar pada arr_candi_pembangun
-        arr_banyakcandi = [0 for i in range(manual_len(arr_pembangun) + 1)]
+        count_candi = manual_len(data_candi)
+        username = [";EOP"]
+        count = [";EOP"]
+        for iteration in range(count_candi):
+            if (howManyX(username, data_candi[iteration][1], 0) == 0):
+                username = manual_append(username, data_candi[iteration][1])
+                count = manual_append(count, 1)
+            else:
+                count[findIdx(username, data_candi[iteration][1])] += 1
         
-        for i in range(manual_len(arr_pembangun)):
-            
-            count = 0
-            count_banyakcandi = howManyX(arr_candi_pembangun, arr_pembangun[i], count)
-            arr_banyakcandi[i] = count_banyakcandi
-            
-        arr_banyakcandi[manual_len(arr_pembangun)] = ";EOP"
-
-        # Jika jumlah jin pembangun = 0
-        if count_pembangun == 0:
+        if count_pembangun <= 1 or count_candi == 0:
             jin_malas = "-"
             jin_rajin = "-"
 
-        # Jika jumlah jin pembangun > 0
         else:
-            max = arr_banyakcandi[0]
-            min = arr_banyakcandi[0]
+            max = count[0]
+            min = count[0]
             id_malas = 0
             id_rajin = 0
 
-            for i in range(manual_len(arr_banyakcandi)):
-                if arr_banyakcandi[i] > max: # Kondisi 1
-                    id_rajin = i
-                    max = arr_banyakcandi[i]
-                elif arr_banyakcandi[i] == max: # Kondisi 2
-                    if firstLetter(arr_pembangun[i]) < firstLetter(arr_pembangun[id_rajin]):
-                        id_rajin = i
-                        max = arr_banyakcandi[i]
+            for iteration in range(manual_len(count)):
+                if count[iteration] > max: # Kondisi 1
+                    id_rajin = iteration
+                    max = count[iteration]
+                elif count[iteration] == max: # Kondisi 2
+                    if firstLetter(username[iteration]) < firstLetter(username[id_rajin]):
+                        id_rajin = iteration
+                        max = count[iteration]
 
-                if arr_banyakcandi[i] < min: # Kondisi 1
-                    id_malas = i
-                    min = arr_banyakcandi[i]
-                elif arr_banyakcandi[i] == min: # Kondisi 2
-                    if firstLetter(arr_pembangun[i]) > firstLetter(arr_pembangun[id_malas]):
-                        id_malas = i
-                        min = arr_banyakcandi[i]
+                if count[iteration] < min: # Kondisi 1
+                    id_malas = iteration
+                    min = count[iteration]
+                elif count[iteration] == min: # Kondisi 2
+                    if firstLetter(username[iteration]) > firstLetter(username[id_malas]):
+                        id_malas = iteration
+                        min = count[iteration]
 
-            jin_malas = arr_pembangun[id_malas]
-            jin_rajin = arr_pembangun[id_rajin]
-
+            jin_rajin = username[id_rajin]
+            jin_malas = username[id_malas]
         # Mengeprint Hasil
         print("="*11 + "\nLaporan Jin" + "\n" + "="*11)
         print(f"Total Jin: {count_jin}")
@@ -400,7 +382,7 @@ def laporanJin(users,bahan,candi, role):
         print(f"Jumlah Pasir: {bahan[1][2]} unit")
         print(f"Jumlah Batu: {bahan[2][2]} unit")
         print(f"Jumlah Air: {bahan[3][2]} unit")
- 
+
 
 # F10 - Laporan Candi - Filbert F
 def laporanCandi(candi, role):
