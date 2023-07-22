@@ -5,6 +5,8 @@
 ##### Filbert Fuvian
 ##### Muhammad Raihan Ariffianto
 
+--------------------------------
+
 ## Deskripsi Persoalan
 Tugas besar ini meminta untuk membuat sebuah program yang menirukan
 sebuah sistem manajerial pembangunan candi pada cerita rakyat Roro Jonggrang.
