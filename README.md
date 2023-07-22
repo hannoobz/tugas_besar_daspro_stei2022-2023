@@ -30,14 +30,14 @@ ada pada username yang sama. Setelah fungsi ini dijalankan, maka pengguna
 dapat terlogin dan mengakses fungsi lain sesuai rolenya. Fungsi ini dapat
 dijalankan tanpa role khusus.
 
-3. Logout
+2. Logout
 
 Sebuah fungsi untuk keluar dari akses pengguna. Fungsi ini hanya
 dapat berjalan ketika sudah terlogin. Setelah fungsi ini dijalankan, akses dari
 fungsi yang memerlukan suatu role spesifik akan ditarik atau dengan kata lain
 terlogout. Fungsi dapat dijalankan tanpa role khusus.
 
-4. Summon Jin
+3. Summon Jin
 
 Fungsi ini dijalankan untuk memanggil jin. Terdapat dua jenis jin yang
 dapat dipanggil, yaitu jin pengumpul dan jin pembangun. Jumlah maksimal
@@ -45,7 +45,7 @@ dari jin yang dapat dipanggil adalah 100. Jika jumlah jin yang dipanggil telah
 mencapai 100, fungsi ini tidak dapat memanggil jin lagi sampai jin yang ada
 kurang dari 100. Fungsi ini hanya dapat diakses oleh Bandung Bondowoso.
 
-5. Hilangkan Jin
+4. Hilangkan Jin
 
 Fungsi ini dijalankan untuk menghapus jin. Pengguna akan diminta
 untuk memasukkan username dari jin yang akan dihapus. Jika username tidak
@@ -55,7 +55,7 @@ konfirmasi untuk menghapus jin. Jika dikonfirmasi, makan jin akan terhapus
 dan tidak jika sebaliknya. Fungsi ini hanya dapat diakses oleh Bandung
 Bondowoso.
 
-6. Ubah Tipe Jin
+5. Ubah Tipe Jin
 
 Fungsi ini dijalankan untuk mengubah tipe jin. Pengguna akan diminta
 untuk memasukkan username dari jin yang akan diubah tipenya. Jika
@@ -65,7 +65,7 @@ Jika jin yang diubah bertipe pembangun, maka jin akan menjadi bertipe
 pengumpul. Berlaku juga sebaliknya. Fungsi ini hanya dapat diakses oleh
 Bandung Bondowoso.
 
-7. Jin Pembangun
+6. Jin Pembangun
 
 Fungsi ini merupakan fungsi untuk membangun candi. Syarat agar
 fungsi ini dapat berjalan adalah terdapat bahan bangunan tersedia. Jika bahan
@@ -73,13 +73,13 @@ bangunan tidak cukup, maka candi tidak akan terbangun. Sebaliknya, jika
 kondisi terpenuhi, candi akan terbangun. Fungsi ini hanya dapat diakses oleh
 Jin Pembangun.
 
-8. Jin Pengumpul
+7. Jin Pengumpul
 
 Fungsi ini merupakan fungsi untuk mengumpulkan bahan bangunan. Ketika
 dijalankan, fungsi akan menambah bahan bangunan yang tersedia. Fungsi ini
 hanya dapat diakses oleh Jin Pengumpul.
 
-9. Batch Bangun/Kumpul
+8. Batch Bangun/Kumpul
 
 Bagian ini terdiri atas dua fungsi, yaitu batch bangun dan batch
 kumpul. Sesuai dengan namanya, fungsi tersebut menjalankan fungsi bangun
@@ -91,24 +91,24 @@ bagian. Jika tidak ada jin pengumpul, maka batch kumpul tidak bisa
 dijalankan. Berlaku juga untuk batch bangun. Fungsi ini hanya dapat diakses
 oleh Bandung Bondowoso.
 
-10. Ambil Laporan Jin
+9. Ambil Laporan Jin
 
 Prosedur ini digunakan untuk mengambil laporan mengenai kinerja
 dari para jin. Prosedur ini hanya dapat diakses oleh Bandung Bondowoso.
 
-11. Ambil Laporan Candi
+10. Ambil Laporan Candi
 
 Prosedur ini digunakan untuk mengambil laporan progress dari pembangunan
 candi. Prosedur ini hanya dapat diakses oleh Bandung Bondowoso.
 
-12. Hancurkan Candi
+11. Hancurkan Candi
 
 Fungsi ini digunakan untuk menghancurkan candi. Fungsi ini akan
 meminta ID dari candi yang akan dihancurkan. Jika sudah dihancurkan, maka
 candi akan hilang dari data sementara dan akan hilang permanen jika prosedur
 save dijalankan.
 
-13. Ayam Berkokok
+12. Ayam Berkokok
 
 Prosedur ini digunakan untuk mengakhiri permainan. Jika candi yang
 terbangun sudah mencapai 100, maka Bandung Bondowoso akan
@@ -117,7 +117,7 @@ terbangun belum mencapai 100, maka Roro Jonggrang yang akan
 memenangkan permainan ketika prosedur ini dijalankan. Prosedur ini hanya
 dapat diakses oleh Roro Jonggrang.
 
-14. Load
+13. Load
 
 Prosedur ini digunakan untuk memuat file data eksternal ke dalam
 permainan. Pengguna akan diminta sebuah argument berupa nama folder atau
@@ -127,7 +127,7 @@ Jika argument folder yang diberikan tidak ada, maka akan dikeluarkan pesan
 bahwa folder tidak ada dan kemudian keluar dari program. Jika folder ada,
 maka program akan memuat file eksternal dan menjalankan program utama.
 
-15. Save
+14. Save
 
 Prosedur ini digunakan untuk menyimpan data dari permainan ke file
 data eksternal. Pengguna akan diminta nama folder yang akan digunakan
@@ -138,13 +138,13 @@ disimpan ke folder tersebut. Jika folder sudah ada dan file data eksternal sudah
 ada dalam folder tersebut, maka file yang ada akan di-overwrite oleh file data
 yang akan disimpan. Prosedur ini tidak memerlukan role akses khusus.
 
-16. Help
+15. Help
 
 Prosedur ini digunakan untuk menampilkan bantuan perintah apa saja
 yang tersedia untuk setiap role yang bersesuaian. Prosedur ini tidak
 memerlukan role akses khusus.
 
-17. Exit
+16. Exit
 
 Prosedur ini digunakan untuk keluar dari program. Pengguna akan diminta
 konfirmasi apakah ingin menyimpan data permainan atau tidak. Jika iya, akan
